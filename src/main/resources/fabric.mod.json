@@ -1,0 +1,27 @@
+{
+	"schemaVersion": 1,
+	"id": "mob_combat_rebalance",
+	"version": "${version}",
+	"name": "Mob Combat Rebalance",
+	"description": "Vanilla-friendly mob combat overhaul: higher baseline XP and occasional elite mobs with bonus loot.",
+	"authors": [
+		"spicato"
+	],
+	"license": "CC0-1.0",
+	"icon": "assets/mob_combat_rebalance/icon.png",
+	"environment": "*",
+	"entrypoints": {
+		"main": [
+			"mob_combat_rebalance.Mob_combat_rebalance"
+		],
+		"client": [
+			"mob_combat_rebalance.Mob_combat_rebalanceClient"
+		]
+	},
+	"depends": {
+		"fabricloader": ">=0.19.3",
+		"minecraft": "~1.21.11",
+		"java": ">=21",
+		"fabric-api": "*"
+	}
+}

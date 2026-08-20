@@ -1,0 +1,17 @@
+{
+	"schemaVersion": 1,
+	"id": "mob_combat_rebalance_test",
+	"version": "${version}",
+	"name": "Mob Combat Rebalance Game Tests",
+	"environment": "*",
+	"entrypoints": {
+		"fabric-gametest": [
+			"mob_combat_rebalance.gametest.ModLoadsGameTest"
+		]
+	},
+	"depends": {
+		"mob_combat_rebalance": "*",
+		"fabric-api": "*",
+		"minecraft": "~1.21.11"
+	}
+}
