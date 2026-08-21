@@ -10,7 +10,7 @@ Write for players, not developers. Focus on what changed in the game.
 
 ```markdown
 - Hostile mobs drop more XP from combat
-- Rare glowing elite mobs appear in the overworld with bonus loot
+- Rare slightly-larger elite mobs appear in the overworld with bonus loot
 ```
 
 ## Guidelines

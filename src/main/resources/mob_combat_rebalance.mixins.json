@@ -1,0 +1,16 @@
+{
+	"required": true,
+	"package": "mob_combat_rebalance.mixin",
+	"compatibilityLevel": "JAVA_21",
+	"mixins": [
+		"LivingEntityMixin",
+		"LivingEntityDamageMixin",
+		"LivingEntityLootMixin",
+		"MobMixin",
+		"CreeperAccessor",
+		"ZombieVillagerMixin"
+	],
+	"injectors": {
+		"defaultRequire": 1
+	}
+}

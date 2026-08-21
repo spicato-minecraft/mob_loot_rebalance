@@ -1,0 +1,18 @@
+{
+  "pools": [
+    {
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "minecraft:enchanted_book",
+          "functions": [
+            {
+              "function": "mob_combat_rebalance:routed_enchanted_book"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

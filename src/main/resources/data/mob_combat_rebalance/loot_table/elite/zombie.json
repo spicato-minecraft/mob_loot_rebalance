@@ -1,0 +1,48 @@
+{
+  "pools": [
+    {
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "minecraft:loot_table",
+          "value": "minecraft:entities/zombie",
+          "weight": 30
+        },
+        {
+          "type": "minecraft:loot_table",
+          "value": "mob_combat_rebalance:elite/enchanting_book_roll",
+          "weight": 25
+        },
+        {
+          "type": "minecraft:loot_table",
+          "value": "mob_combat_rebalance:elite/combat_potion",
+          "weight": 23
+        },
+        {
+          "type": "minecraft:item",
+          "name": "minecraft:golden_apple",
+          "weight": 9
+        },
+        {
+          "type": "minecraft:item",
+          "name": "minecraft:iron_ingot",
+          "weight": 9,
+          "functions": [
+            {
+              "function": "minecraft:set_count",
+              "count": {
+                "min": 9,
+                "max": 12
+              }
+            }
+          ]
+        },
+        {
+          "type": "minecraft:item",
+          "name": "minecraft:name_tag",
+          "weight": 4
+        }
+      ]
+    }
+  ]
+}

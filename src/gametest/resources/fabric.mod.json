@@ -6,7 +6,10 @@
 	"environment": "*",
 	"entrypoints": {
 		"fabric-gametest": [
-			"mob_combat_rebalance.gametest.ModLoadsGameTest"
+			"mob_combat_rebalance.gametest.ModLoadsGameTest",
+			"mob_combat_rebalance.gametest.EliteSpawnGameTest",
+			"mob_combat_rebalance.gametest.EliteLootGameTest",
+			"mob_combat_rebalance.gametest.ElitePayoutGameTest"
 		]
 	},
 	"depends": {

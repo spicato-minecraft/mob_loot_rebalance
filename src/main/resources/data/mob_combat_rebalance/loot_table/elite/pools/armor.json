@@ -1,0 +1,100 @@
+{
+  "pools": [
+    {
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "minecraft:enchanted_book",
+          "functions": [
+            {
+              "function": "minecraft:set_enchantments",
+              "add": false,
+              "enchantments": {
+                "minecraft:protection": 1.0
+              }
+            }
+          ]
+        },
+        {
+          "type": "minecraft:item",
+          "name": "minecraft:enchanted_book",
+          "functions": [
+            {
+              "function": "minecraft:set_enchantments",
+              "add": false,
+              "enchantments": {
+                "minecraft:fire_protection": 1.0
+              }
+            }
+          ]
+        },
+        {
+          "type": "minecraft:item",
+          "name": "minecraft:enchanted_book",
+          "functions": [
+            {
+              "function": "minecraft:set_enchantments",
+              "add": false,
+              "enchantments": {
+                "minecraft:feather_falling": 1.0
+              }
+            }
+          ]
+        },
+        {
+          "type": "minecraft:item",
+          "name": "minecraft:enchanted_book",
+          "functions": [
+            {
+              "function": "minecraft:set_enchantments",
+              "add": false,
+              "enchantments": {
+                "minecraft:blast_protection": 1.0
+              }
+            }
+          ]
+        },
+        {
+          "type": "minecraft:item",
+          "name": "minecraft:enchanted_book",
+          "functions": [
+            {
+              "function": "minecraft:set_enchantments",
+              "add": false,
+              "enchantments": {
+                "minecraft:projectile_protection": 1.0
+              }
+            }
+          ]
+        },
+        {
+          "type": "minecraft:item",
+          "name": "minecraft:enchanted_book",
+          "functions": [
+            {
+              "function": "minecraft:set_enchantments",
+              "add": false,
+              "enchantments": {
+                "minecraft:thorns": 1.0
+              }
+            }
+          ]
+        },
+        {
+          "type": "minecraft:item",
+          "name": "minecraft:enchanted_book",
+          "functions": [
+            {
+              "function": "minecraft:set_enchantments",
+              "add": false,
+              "enchantments": {
+                "minecraft:unbreaking": 1.0
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
