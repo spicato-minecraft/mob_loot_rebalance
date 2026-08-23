@@ -22,7 +22,7 @@ class ModConfigTest {
 	void defaultsMatchV1Spec() {
 		ModConfig config = ModConfig.defaults();
 
-		assertTrue(config.xp.enabled);
+		assertFalse(config.xp.enabled);
 		assertEquals(1.35, config.xp.multiplier, 0.0001);
 		assertTrue(config.elites.enabled);
 		assertEquals(0.07, config.elites.spawn_chance, 0.0001);

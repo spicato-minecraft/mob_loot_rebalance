@@ -19,7 +19,7 @@ class ModConfigMigrationTest {
 		boolean addedKeys = invokeMigration(root, config);
 
 		assertTrue(addedKeys);
-		assertTrue(config.xp.enabled);
+		assertFalse(config.xp.enabled);
 		assertEquals(1.35, config.xp.multiplier, 0.0001);
 		assertTrue(config.elites.enabled);
 		assertEquals(0.07, config.elites.spawn_chance, 0.0001);

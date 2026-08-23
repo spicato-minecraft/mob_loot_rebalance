@@ -1,6 +1,6 @@
 # Mob Combat Rebalance
 
-Fabric mod for Minecraft **1.21.11** that makes combat farming feel more rewarding through higher baseline XP and occasional elite mobs with vanilla-only bonus loot.
+Fabric mod for Minecraft **1.21.11** that makes combat farming feel more rewarding through occasional elite mobs with vanilla-only bonus loot. Optional baseline XP uplift for hostiles is available in config but off by default.
 
 ## Compatibility
 
@@ -19,7 +19,7 @@ From this directory:
 ./gradlew build
 ```
 
-The output JAR is at `build/libs/mob_combat_rebalance-1.0.0.jar` (version from `gradle.properties`).
+The output JAR is at `build/libs/mob_combat_rebalance-1.1.0.jar` (version from `gradle.properties`).
 
 ## Test
 
@@ -72,7 +72,7 @@ Behavior tests are tracked in [Notion Tasks](https://app.notion.com/p/3b716e8d4d
 
 ## Architecture
 
-Server-side config-driven combat rebalance: baseline XP uplift for hostiles, elite spawn rolls at natural spawn time, and additional elite loot-table generates on player kills. No new items or UI — feedback uses vanilla particles, sounds, and XP orbs.
+Server-side config-driven combat rebalance: optional baseline XP uplift for hostiles (off by default), elite spawn rolls at natural spawn time, and additional elite loot-table generates on player kills. No new items or UI — feedback uses vanilla particles, sounds, and XP orbs.
 
 Epic and acceptance criteria: [Mob combat rebalance (vanilla-friendly overhaul)](https://app.notion.com/p/3bb16e8d4da3811796a7de1b58b9fc33).
 
@@ -111,7 +111,7 @@ Elite visual cues: **1.3× scale** plus sparse **red dust specks** (`minecraft:d
 
 ### XP uplift pillar (Phase 2)
 
-Player-killed hostiles (`instanceof Enemy`, excluding Wither, Ender Dragon, and Warden) receive ~1.35× vanilla XP orbs when `xp.enabled` is true. Relative XP tiers are preserved by scaling the final `LivingEntity.getExperienceReward` result (after vanilla looting/enchantment processing). Spawner and trial-spawner mobs are eligible for uplift; elite spawn is a separate pillar.
+Player-killed hostiles (`instanceof Enemy`, excluding Wither, Ender Dragon, and Warden) receive ~1.35× vanilla XP orbs when `xp.enabled` is true. This pillar is **off by default**; set `xp.enabled` to `true` to opt in. Relative XP tiers are preserved by scaling the final `LivingEntity.getExperienceReward` result (after vanilla looting/enchantment processing). Spawner and trial-spawner mobs are eligible for uplift; elite spawn is a separate pillar.
 
 **Hook point:** `@Inject` at `RETURN` of `LivingEntity.getExperienceReward`, gated by `XpUpliftPolicy` and `ModConfig.isXpPillarActive()`. Player-kill credit uses `getLastHurtByPlayer()` / `getKillCredit()`.
 
@@ -135,7 +135,7 @@ Server-side JSON at `config/mob_combat_rebalance.json`. Defaults are written on 
 
 | Section | Keys | Default |
 |---------|------|---------|
-| `xp` | `enabled`, `multiplier` | `true`, `1.35` |
+| `xp` | `enabled`, `multiplier` | `false`, `1.35` |
 | `elites` | `enabled`, `spawn_chance`, `ambient_particle`, `particle_dust_color`, `particle_dust_scale`, `particle_interval_ticks`, `uat_glow` | `true`, `0.07`, `minecraft:dust`, `0xFFFF0000`, `0.4`, `30`, `false` |
 | `elite_loot` | `enabled` | `true` |
 | `kill_method` | `lookback_ticks` | `100` |

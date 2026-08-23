@@ -120,7 +120,7 @@ public final class ModConfig {
 			addedKeys = true;
 		} else {
 			if (!xp.has("enabled")) {
-				config.xp.enabled = true;
+				config.xp.enabled = false;
 				addedKeys = true;
 			}
 			if (!xp.has("multiplier")) {
