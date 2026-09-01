@@ -43,12 +43,10 @@ Each supported Minecraft version has its own long-lived branch named after the e
 - **Feature/fix work:** branch from the target version as `{version}/feature-name`, merge back into the version branch
 
 ```bash
-git clone https://github.com/spicato-minecraft/mob_combat_rebalance.git mob_loot_rebalance
+git clone https://github.com/spicato-minecraft/mob_loot_rebalance.git
 cd mob_loot_rebalance
 git checkout 1.21.11
 ```
-
-Local workspace folder is **`mob_loot_rebalance`**. GitHub still uses `mob_combat_rebalance` until the breaking 2.0.0 release rename (redirects will follow).
 
 ## Releases and Modrinth
 
