@@ -1,25 +1,25 @@
 {
 	"schemaVersion": 1,
-	"id": "mob_combat_rebalance",
+	"id": "mob_loot_rebalance",
 	"version": "${version}",
-	"name": "Mob Combat Rebalance",
-	"description": "Vanilla-friendly mob combat overhaul: higher baseline XP and occasional elite mobs with bonus loot.",
+	"name": "Mob Loot Rebalance",
+	"description": "Elite mobs, themed vanilla loot, and optional hostile XP. Kill-method books and potions — not combat animations.",
 	"authors": [
 		"spicato"
 	],
 	"license": "CC0-1.0",
-	"icon": "assets/mob_combat_rebalance/icon.png",
+	"icon": "assets/mob_loot_rebalance/icon.png",
 	"environment": "*",
 	"entrypoints": {
 		"main": [
-			"mob_combat_rebalance.Mob_combat_rebalance"
+			"mob_loot_rebalance.Mob_loot_rebalance"
 		],
 		"client": [
-			"mob_combat_rebalance.Mob_combat_rebalanceClient"
+			"mob_loot_rebalance.Mob_loot_rebalanceClient"
 		]
 	},
 	"mixins": [
-		"mob_combat_rebalance.mixins.json"
+		"mob_loot_rebalance.mixins.json"
 	],
 	"depends": {
 		"fabricloader": ">=0.19.3",

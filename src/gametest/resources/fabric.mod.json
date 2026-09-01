@@ -1,19 +1,19 @@
 {
 	"schemaVersion": 1,
-	"id": "mob_combat_rebalance_test",
+	"id": "mob_loot_rebalance_test",
 	"version": "${version}",
-	"name": "Mob Combat Rebalance Game Tests",
+	"name": "Mob Loot Rebalance Game Tests",
 	"environment": "*",
 	"entrypoints": {
 		"fabric-gametest": [
-			"mob_combat_rebalance.gametest.ModLoadsGameTest",
-			"mob_combat_rebalance.gametest.EliteSpawnGameTest",
-			"mob_combat_rebalance.gametest.EliteLootGameTest",
-			"mob_combat_rebalance.gametest.ElitePayoutGameTest"
+			"mob_loot_rebalance.gametest.ModLoadsGameTest",
+			"mob_loot_rebalance.gametest.EliteSpawnGameTest",
+			"mob_loot_rebalance.gametest.EliteLootGameTest",
+			"mob_loot_rebalance.gametest.ElitePayoutGameTest"
 		]
 	},
 	"depends": {
-		"mob_combat_rebalance": "*",
+		"mob_loot_rebalance": "*",
 		"fabric-api": "*",
 		"minecraft": "~1.21.11"
 	}

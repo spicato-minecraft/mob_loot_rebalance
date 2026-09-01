@@ -1,0 +1,38 @@
+{
+  "pools": [
+    {
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "minecraft:loot_table",
+          "value": "minecraft:entities/breeze",
+          "weight": 15
+        },
+        {
+          "type": "minecraft:loot_table",
+          "value": "mob_loot_rebalance:elite/books/breeze",
+          "weight": 33
+        },
+        {
+          "type": "minecraft:loot_table",
+          "value": "mob_loot_rebalance:elite/potions/breeze",
+          "weight": 30
+        },
+        {
+          "type": "minecraft:item",
+          "name": "minecraft:wind_charge",
+          "weight": 22,
+          "functions": [
+            {
+              "function": "minecraft:set_count",
+              "count": {
+                "min": 8,
+                "max": 16
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,38 @@
+{
+  "pools": [
+    {
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "minecraft:loot_table",
+          "value": "minecraft:entities/blaze",
+          "weight": 15
+        },
+        {
+          "type": "minecraft:loot_table",
+          "value": "mob_loot_rebalance:elite/books/blaze",
+          "weight": 33
+        },
+        {
+          "type": "minecraft:loot_table",
+          "value": "mob_loot_rebalance:elite/potions/blaze",
+          "weight": 30
+        },
+        {
+          "type": "minecraft:item",
+          "name": "minecraft:blaze_rod",
+          "weight": 22,
+          "functions": [
+            {
+              "function": "minecraft:set_count",
+              "count": {
+                "min": 4,
+                "max": 8
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

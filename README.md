@@ -1,6 +1,6 @@
-# Mob Combat Rebalance
+# Mob Loot Rebalance
 
-Fabric mod for Minecraft **1.21.11** that makes combat farming feel more rewarding through occasional elite mobs with vanilla-only bonus loot. Optional baseline XP uplift for hostiles is available in config but off by default.
+Fabric mod for Minecraft **1.21.11**. Occasional **elite** hostiles drop themed vanilla-only bonus loot (enchanted books and potions routed by kill method). Optional baseline XP uplift for hostiles is available in config but off by default. This JAR does **not** change how mobs swing or animate.
 
 ## Compatibility
 
@@ -19,7 +19,7 @@ From this directory:
 ./gradlew build
 ```
 
-The output JAR is at `build/libs/mob_combat_rebalance-1.1.0.jar` (version from `gradle.properties`).
+The output JAR is at `build/libs/mob_loot_rebalance-2.0.0.jar` (version from `gradle.properties`).
 
 ## Test
 
@@ -43,10 +43,12 @@ Each supported Minecraft version has its own long-lived branch named after the e
 - **Feature/fix work:** branch from the target version as `{version}/feature-name`, merge back into the version branch
 
 ```bash
-git clone https://github.com/spicato-minecraft/mob_combat_rebalance.git
-cd mob_combat_rebalance
+git clone https://github.com/spicato-minecraft/mob_combat_rebalance.git mob_loot_rebalance
+cd mob_loot_rebalance
 git checkout 1.21.11
 ```
+
+Local workspace folder is **`mob_loot_rebalance`**. GitHub still uses `mob_combat_rebalance` until the breaking 2.0.0 release rename (redirects will follow).
 
 ## Releases and Modrinth
 
@@ -72,38 +74,38 @@ Behavior tests are tracked in [Notion Tasks](https://app.notion.com/p/3b716e8d4d
 
 ## Architecture
 
-Server-side config-driven combat rebalance: optional baseline XP uplift for hostiles (off by default), elite spawn rolls at natural spawn time, and additional elite loot-table generates on player kills. No new items or UI — feedback uses vanilla particles, sounds, and XP orbs.
+Server-side loot and elite-hunt rebalance: optional baseline XP uplift for hostiles (off by default), elite spawn rolls for natural/structure/patrol/spawner hostiles (not raid `EVENT` waves), and additional elite loot-table generates on player kills. No new items or UI — feedback uses vanilla particles, sounds, and XP orbs. Combat animations live in a separate future mod (`mob_combat_rebalance` after this JAR is rebranded).
 
-Epic and acceptance criteria: [Mob combat rebalance (vanilla-friendly overhaul)](https://app.notion.com/p/3bb16e8d4da3811796a7de1b58b9fc33).
+Themed elite books and potions: [Themed elite enchant books](https://app.notion.com/p/3cc16e8d4da381498155fb1fc4b23a82) and [Elite loot matrix (per-kill)](https://app.notion.com/p/3cd16e8d4da381c494a0e3100b9643d7). Parent v1 epic (partially superseded): [Mob combat rebalance (vanilla-friendly overhaul)](https://app.notion.com/p/3bb16e8d4da3811796a7de1b58b9fc33).
 
 ### Elite spawn reason policy (AC-23 spike)
 
 Minecraft **1.21.11** exposes spawn provenance as `EntitySpawnReason` (not the older `MobSpawnType` name). The reason is available on the server when a mob finishes spawning via `Mob.finalizeSpawn(ServerLevelAccessor, DifficultyInstance, EntitySpawnReason, SpawnGroupData)`.
 
-**v1 locked classification:**
+**Locked classification (themed-loot pass):**
 
 | EntitySpawnReason | Elite roll |
 |-------------------|------------|
-| `NATURAL` | Allow |
-| `CHUNK_GENERATION` | Allow |
-| `STRUCTURE` | Deny |
+| `NATURAL` | Allow (`spawn_chance`, default 0.14) |
+| `CHUNK_GENERATION` | Allow (`spawn_chance`) |
+| `STRUCTURE` | Allow (`spawn_chance`) |
+| `PATROL` | Allow (`spawn_chance`) |
+| `SPAWNER` | Allow (`spawner_trial_spawn_chance`, default 0.02) |
+| `TRIAL_SPAWNER` | Allow (`spawner_trial_spawn_chance`) |
 | `TRIGGERED` | Deny |
-| `SPAWNER` | Deny |
-| `TRIAL_SPAWNER` | Deny |
 | `REINFORCEMENT` | Deny |
-| `PATROL` | Deny |
 | `CONVERSION` | Deny |
-| `EVENT` | Deny |
+| `EVENT` | Deny (raid waves; loot waits on a dedicated raids mod) |
 | All others (`BREEDING`, `MOB_SUMMONED`, `JOCKEY`, `BUCKET`, `SPAWN_ITEM_USE`, `COMMAND`, `DISPENSER`, `LOAD`, `DIMENSION_TRAVEL`) | Deny |
 
-Vanilla provides `EntitySpawnReason.isSpawner(reason)`, which returns true for `SPAWNER` and `TRIAL_SPAWNER`. Policy is implemented in `EliteSpawnPolicy.isEligibleForEliteRoll(EntitySpawnReason)` with an allow-list of two reasons; everything else denies.
+Vanilla provides `EntitySpawnReason.isSpawner(reason)`, which returns true for `SPAWNER` and `TRIAL_SPAWNER`. Those use the lower trial chance. Policy is `EliteSpawnPolicy.isEligibleForEliteRoll(EntitySpawnReason)`.
 
-**Phase 3 hook point:** mixin at the tail of `Mob.finalizeSpawn`, after vanilla spawn setup, gated by:
+**Hook point:** mixin at the tail of `Mob.finalizeSpawn`, after vanilla spawn setup, gated by:
 
 1. `EliteSpawnPolicy.isEligibleForEliteRoll(spawnReason)`
-2. mob-type eligibility (12 core overworld hostiles)
+2. mob-type eligibility (35 matrix hostiles; no bees, Wither, Ender Dragon, or Warden)
 3. not a baby mob
-4. config elite spawn rate &gt; 0
+4. the chance for that reason &gt; 0
 
 No Fabric event exposes spawn reason directly; a server mixin is the reliable hook. **Spike result: no blockers.**
 
@@ -120,23 +122,24 @@ Player-killed hostiles (`instanceof Enemy`, excluding Wither, Ender Dragon, and 
 | Case | Spawn source | Expected |
 |------|--------------|----------|
 | Natural hostile | dark-area natural spawn | elite roll allowed (force 100% in test config) |
-| Monster spawner | `SPAWNER` | never elite |
-| Trial spawner | `TRIAL_SPAWNER` | never elite |
+| Structure | `STRUCTURE` | elite roll allowed |
+| Patrol | pillager patrol | elite roll allowed |
+| Monster spawner | `SPAWNER` | elite roll allowed at `spawner_trial_spawn_chance` (0 if that chance is 0) |
+| Trial spawner | `TRIAL_SPAWNER` | same as spawner |
 | Reinforcement | zombie reinforcement | never elite |
-| Patrol | pillager patrol | never elite |
 | Conversion | e.g. drowned from zombie | never elite |
-| Event / summoned | raid wave / `/summon` | never elite |
+| Event | raid wave | never elite |
 
-Baby-mob exclusion and mob-type eligibility are separate checks (not spawn-reason), covered in Phase 3 spawn tests.
+Baby-mob exclusion and mob-type eligibility are separate checks (not spawn-reason).
 
 ### Config (Phase 1)
 
-Server-side JSON at `config/mob_combat_rebalance.json`. Defaults are written on first run; missing keys merge from defaults on load.
+Server-side JSON at `config/mob_loot_rebalance.json`. Defaults are written on first run; missing keys merge from defaults on load.
 
 | Section | Keys | Default |
 |---------|------|---------|
 | `xp` | `enabled`, `multiplier` | `false`, `1.35` |
-| `elites` | `enabled`, `spawn_chance`, `ambient_particle`, `particle_dust_color`, `particle_dust_scale`, `particle_interval_ticks`, `uat_glow` | `true`, `0.07`, `minecraft:dust`, `0xFFFF0000`, `0.4`, `30`, `false` |
+| `elites` | `enabled`, `spawn_chance`, `spawner_trial_spawn_chance`, `ambient_particle`, `particle_dust_color`, `particle_dust_scale`, `particle_interval_ticks`, `uat_glow` | `true`, `0.14`, `0.02`, `minecraft:dust`, `0xFFFF0000`, `0.4`, `30`, `false` |
 | `elite_loot` | `enabled` | `true` |
 | `kill_method` | `lookback_ticks` | `100` |
 | `combat_potion` | `allow_invisibility` | `false` |
@@ -146,21 +149,20 @@ Pillar helpers: `ModConfig.isXpPillarActive()`, `isElitesPillarActive()`, `isEli
 
 ### Elite loot tables (Phase 5)
 
-Default elite tables live under `data/mob_combat_rebalance/loot_table/elite/`. Each mob table is one pool with `rolls: 1` and integer weights summing to **100** (weight = percent).
+Default elite tables live under `data/mob_loot_rebalance/loot_table/elite/`. Each **outer** mob table is one pool with `rolls: 1` and integer weights summing to **100**:
 
-Shared pools:
+| Weight | Nested table |
+|--------|----------------|
+| 15 | `minecraft:entities/<mob>` consolation |
+| 33 | `mob_loot_rebalance:elite/books/<mob>` |
+| 30 | `mob_loot_rebalance:elite/potions/<mob>` |
+| 22 | per-mob unique extras |
 
-| Table | Role |
-|-------|------|
-| `enchanting_book_roll` | Stub table; kill-method sub-pools (`pools/armor`, `melee`, `ranged`, `mending`, `fallback`) are rolled in Java at elite death. |
-| `combat_potion` | Shared splash combat potions (invisibility excluded by default config). |
-| `pools/*` | Level I combat enchant books only — no mining, fishing, exploration, or Wind Burst enchants. |
-
-Per-mob tables reference `mob_combat_rebalance:elite/enchanting_book_roll`, `mob_combat_rebalance:elite/combat_potion`, and `minecraft:entities/<mob>` for the vanilla consolation roll (weight 30).
+Book nested tables have **two independent pools**: **core** (one pick among empty, armor books, Sharpness or Power, rare Mending) and **theme** vs empty. A book slot drops **at most two books** (one core + one theme). Potion nested tables have **two** (Healing splash vs empty, theme vs empty). Contents: [Elite loot matrix (per-kill)](https://app.notion.com/p/3cd16e8d4da381c494a0e3100b9643d7). Level I combat books only — no Unbreaking, mining, fishing, exploration, or Wind Burst.
 
 ### Kill-method routing (Phase 4)
 
-Player-attributed damage on hostiles is recorded in a per-entity rolling history (`LivingEntityDamageMixin` → `PlayerDamageHistory`). On elite kill, `EliteLootService` calls the router to pick an enchanting-book sub-pool.
+Player-attributed damage on hostiles is recorded in a per-entity rolling history (`LivingEntityDamageMixin` → `PlayerDamageHistory`). Kill method gates **core weapon books** (Sharpness vs Power; fallback skips those entries) **and theme weapon signatures**. Armor and rare Mending sit on the same core pick (at most one of them). Melee signatures (Smite, Lunge, Fire Aspect, …) only drop on melee kills; ranged signatures (Punch, Infinity, Flame, …) only drop on ranged kills.
 
 **Classification (`KillMethodClassifier`):**
 
@@ -168,25 +170,21 @@ Player-attributed damage on hostiles is recorded in a per-entity rolling history
 |------------|---------|
 | `MELEE` | Sword, axe, mace, spear jab/charge, fist, trident melee |
 | `RANGED` | Bow/crossbow arrows, thrown trident, thrown spear |
-| `FALLBACK` | No qualifying player damage in lookback (`kill_method.lookback_ticks`, default 100) |
+| `FALLBACK` | No qualifying player damage in lookback (`kill_method.lookback_ticks`, default 100) → skip Sharpness/Power and method-gated theme |
 
 Fire burn-out (`on_fire`, `in_fire`, etc.) does not append history; the most recent bow/melee hit inside the window is credited instead.
 
-**Router API:**
-
 ```java
 KillMethod method = KillMethodRouter.resolveKillMethod(victim, killer, ModConfig.get());
-Identifier poolId = KillMethodRouter.resolve(victim, killer, ModConfig.get(), serverLevel.getRandom());
+// Core Sharpness/Power and theme entries: condition mob_loot_rebalance:kill_method method=melee|ranged
 ```
-
-Weighted rolls: **melee** → armor 4, melee 4, mending 1; **ranged** → armor 1, ranged 2, mending 1 (~2:1 ranged:armor); **fallback** → `elite/pools/fallback`. Enchant lists remain in JSON pools only — the router returns pool ids, not enchant ids.
 
 ### Elite payouts + feedback (Phase 7)
 
 Player-killed elites grant three payouts gated by `ElitePayoutPolicy`:
 
 1. **Bonus XP** — `3 ×` the mob's uplifted reward (on top of the Phase 2 baseline uplift). Non-player kills get vanilla XP only.
-2. **Elite-table loot** — exactly one roll from `mob_combat_rebalance:elite/<mob>` (Phase 6).
+2. **Elite-table loot** — one pick from `mob_loot_rebalance:elite/<mob>` (book *slot* or potion *slot* can then yield multiple items).
 3. **Kill feedback** — short configurable sound (default amethyst chime) at the death location.
 
 **Hook points:**
@@ -204,6 +202,6 @@ Target: **~1–2 Level I enchanted books** per dedicated hunting night (~7 min, 
 |----------|---------|
 | [`docs/uat/hunting-night-cadence.md`](docs/uat/hunting-night-cadence.md) | Trial protocol + tuning procedure |
 | [`docs/uat/trial-log.md`](docs/uat/trial-log.md) | 3-night results template |
-| `balance/HuntingNightCadenceModel` | Expected books = `kills × spawn_chance × 0.25` |
+| `balance/HuntingNightCadenceModel` | Expected books = `kills × spawn_chance × 0.33 × 1.0167` (0.3355 books per elite) |
 
-Pre-flight analysis at default **7%** and ~100 eligible kills/night yields **~1.75 books** (within the 1–2 band). Tune `elites.spawn_chance` in config if your kill rate differs. See trial log for sign-off.
+Pre-flight analysis at default **14%** field rate and ~100 eligible kills/night yields **~4.70 books** (still above the 1–2 band). Spawner/trial stay at **2%**. Tune `elites.spawn_chance` after UAT if the night feels too generous. See trial log for sign-off.

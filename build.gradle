@@ -17,7 +17,7 @@ loom {
 	splitEnvironmentSourceSets()
 
 	mods {
-		"mob_combat_rebalance" {
+		"mob_loot_rebalance" {
 			sourceSet sourceSets.main
 			sourceSet sourceSets.client
 		}
@@ -27,7 +27,7 @@ loom {
 fabricApi {
 	configureTests {
 		createSourceSet = true
-		modId = "mob_combat_rebalance_test"
+		modId = "mob_loot_rebalance_test"
 		enableGameTests = true
 		enableClientGameTests = false
 		eula = true

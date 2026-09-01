@@ -1,0 +1,746 @@
+{
+	"meta": {
+		"format_version": "4.10",
+		"model_format": "modded_entity",
+		"box_uv": true
+	},
+	"name": "zombie_elite",
+	"geometry_name": "zombie_elite",
+	"modded_entity_version": "1.17",
+	"credit": "Vanilla Minecraft 1.21.11 zombie texture + HumanoidModel layout for elite reskin WIP",
+	"resolution": {
+		"width": 64,
+		"height": 64
+	},
+	"elements": [
+		{
+			"name": "head",
+			"box_uv": true,
+			"rescale": false,
+			"locked": false,
+			"from": [
+				-4,
+				24,
+				-4
+			],
+			"to": [
+				4,
+				32,
+				4
+			],
+			"autouv": 0,
+			"color": 0,
+			"origin": [
+				0,
+				24,
+				0
+			],
+			"uv_offset": [
+				0,
+				0
+			],
+			"faces": {
+				"north": {
+					"uv": [
+						8,
+						8,
+						16,
+						16
+					],
+					"texture": "#zombie"
+				},
+				"east": {
+					"uv": [
+						16,
+						8,
+						24,
+						16
+					],
+					"texture": "#zombie"
+				},
+				"south": {
+					"uv": [
+						24,
+						8,
+						32,
+						16
+					],
+					"texture": "#zombie"
+				},
+				"west": {
+					"uv": [
+						0,
+						8,
+						8,
+						16
+					],
+					"texture": "#zombie"
+				},
+				"up": {
+					"uv": [
+						8,
+						0,
+						16,
+						8
+					],
+					"texture": "#zombie"
+				},
+				"down": {
+					"uv": [
+						16,
+						0,
+						24,
+						8
+					],
+					"texture": "#zombie",
+					"rotation": 180
+				}
+			},
+			"type": "cube",
+			"uuid": "a65dd450-2e1a-4a62-b7a0-31ae0bda1d7e"
+		},
+		{
+			"name": "hat",
+			"box_uv": true,
+			"rescale": false,
+			"locked": false,
+			"from": [
+				-4,
+				24,
+				-4
+			],
+			"to": [
+				4,
+				32,
+				4
+			],
+			"autouv": 0,
+			"color": 0,
+			"origin": [
+				0,
+				24,
+				0
+			],
+			"uv_offset": [
+				32,
+				0
+			],
+			"faces": {
+				"north": {
+					"uv": [
+						40,
+						8,
+						48,
+						16
+					],
+					"texture": "#zombie"
+				},
+				"east": {
+					"uv": [
+						48,
+						8,
+						56,
+						16
+					],
+					"texture": "#zombie"
+				},
+				"south": {
+					"uv": [
+						56,
+						8,
+						64,
+						16
+					],
+					"texture": "#zombie"
+				},
+				"west": {
+					"uv": [
+						32,
+						8,
+						40,
+						16
+					],
+					"texture": "#zombie"
+				},
+				"up": {
+					"uv": [
+						40,
+						0,
+						48,
+						8
+					],
+					"texture": "#zombie"
+				},
+				"down": {
+					"uv": [
+						48,
+						0,
+						56,
+						8
+					],
+					"texture": "#zombie",
+					"rotation": 180
+				}
+			},
+			"type": "cube",
+			"uuid": "869ed660-1f1b-4e8a-a0aa-dd28dc95b490",
+			"inflate": 0.5
+		},
+		{
+			"name": "body",
+			"box_uv": true,
+			"rescale": false,
+			"locked": false,
+			"from": [
+				-4,
+				12,
+				-2
+			],
+			"to": [
+				4,
+				24,
+				2
+			],
+			"autouv": 0,
+			"color": 0,
+			"origin": [
+				0,
+				24,
+				0
+			],
+			"uv_offset": [
+				16,
+				16
+			],
+			"faces": {
+				"north": {
+					"uv": [
+						20,
+						20,
+						28,
+						32
+					],
+					"texture": "#zombie"
+				},
+				"east": {
+					"uv": [
+						28,
+						20,
+						32,
+						32
+					],
+					"texture": "#zombie"
+				},
+				"south": {
+					"uv": [
+						32,
+						20,
+						40,
+						32
+					],
+					"texture": "#zombie"
+				},
+				"west": {
+					"uv": [
+						16,
+						20,
+						20,
+						32
+					],
+					"texture": "#zombie"
+				},
+				"up": {
+					"uv": [
+						20,
+						16,
+						28,
+						20
+					],
+					"texture": "#zombie"
+				},
+				"down": {
+					"uv": [
+						28,
+						16,
+						36,
+						20
+					],
+					"texture": "#zombie",
+					"rotation": 180
+				}
+			},
+			"type": "cube",
+			"uuid": "05c3bdc1-952f-4afc-9d02-fb8de4421c63"
+		},
+		{
+			"name": "right_arm",
+			"box_uv": true,
+			"rescale": false,
+			"locked": false,
+			"from": [
+				-8,
+				12,
+				-2
+			],
+			"to": [
+				-4,
+				24,
+				2
+			],
+			"autouv": 0,
+			"color": 0,
+			"origin": [
+				-5,
+				22,
+				0
+			],
+			"uv_offset": [
+				40,
+				16
+			],
+			"faces": {
+				"north": {
+					"uv": [
+						44,
+						20,
+						48,
+						32
+					],
+					"texture": "#zombie"
+				},
+				"east": {
+					"uv": [
+						48,
+						20,
+						52,
+						32
+					],
+					"texture": "#zombie"
+				},
+				"south": {
+					"uv": [
+						52,
+						20,
+						56,
+						32
+					],
+					"texture": "#zombie"
+				},
+				"west": {
+					"uv": [
+						40,
+						20,
+						44,
+						32
+					],
+					"texture": "#zombie"
+				},
+				"up": {
+					"uv": [
+						44,
+						16,
+						48,
+						20
+					],
+					"texture": "#zombie"
+				},
+				"down": {
+					"uv": [
+						48,
+						16,
+						52,
+						20
+					],
+					"texture": "#zombie",
+					"rotation": 180
+				}
+			},
+			"type": "cube",
+			"uuid": "89cfcb3b-2fe2-4630-81dd-93c3a259cd34"
+		},
+		{
+			"name": "left_arm",
+			"box_uv": true,
+			"mirror_uv": true,
+			"rescale": false,
+			"locked": false,
+			"from": [
+				4,
+				12,
+				-2
+			],
+			"to": [
+				8,
+				24,
+				2
+			],
+			"autouv": 0,
+			"color": 0,
+			"origin": [
+				5,
+				22,
+				0
+			],
+			"uv_offset": [
+				40,
+				16
+			],
+			"faces": {
+				"north": {
+					"uv": [
+						48,
+						20,
+						44,
+						32
+					],
+					"texture": "#zombie"
+				},
+				"east": {
+					"uv": [
+						40,
+						20,
+						44,
+						32
+					],
+					"texture": "#zombie"
+				},
+				"south": {
+					"uv": [
+						56,
+						20,
+						52,
+						32
+					],
+					"texture": "#zombie"
+				},
+				"west": {
+					"uv": [
+						52,
+						20,
+						48,
+						32
+					],
+					"texture": "#zombie"
+				},
+				"up": {
+					"uv": [
+						48,
+						16,
+						44,
+						20
+					],
+					"texture": "#zombie"
+				},
+				"down": {
+					"uv": [
+						52,
+						16,
+						48,
+						20
+					],
+					"texture": "#zombie",
+					"rotation": 180
+				}
+			},
+			"type": "cube",
+			"uuid": "0b3a03c8-baca-4fcb-b18a-10cad5777b1c"
+		},
+		{
+			"name": "right_leg",
+			"box_uv": true,
+			"rescale": false,
+			"locked": false,
+			"from": [
+				-4,
+				0,
+				-2
+			],
+			"to": [
+				0,
+				12,
+				2
+			],
+			"autouv": 0,
+			"color": 0,
+			"origin": [
+				-1.9,
+				12,
+				0
+			],
+			"uv_offset": [
+				0,
+				16
+			],
+			"faces": {
+				"north": {
+					"uv": [
+						4,
+						20,
+						8,
+						32
+					],
+					"texture": "#zombie"
+				},
+				"east": {
+					"uv": [
+						8,
+						20,
+						12,
+						32
+					],
+					"texture": "#zombie"
+				},
+				"south": {
+					"uv": [
+						12,
+						20,
+						16,
+						32
+					],
+					"texture": "#zombie"
+				},
+				"west": {
+					"uv": [
+						0,
+						20,
+						4,
+						32
+					],
+					"texture": "#zombie"
+				},
+				"up": {
+					"uv": [
+						4,
+						16,
+						8,
+						20
+					],
+					"texture": "#zombie"
+				},
+				"down": {
+					"uv": [
+						8,
+						16,
+						12,
+						20
+					],
+					"texture": "#zombie",
+					"rotation": 180
+				}
+			},
+			"type": "cube",
+			"uuid": "7f020d83-de76-4040-875a-b68c2e204e8a"
+		},
+		{
+			"name": "left_leg",
+			"box_uv": true,
+			"mirror_uv": true,
+			"rescale": false,
+			"locked": false,
+			"from": [
+				0,
+				0,
+				-2
+			],
+			"to": [
+				4,
+				12,
+				2
+			],
+			"autouv": 0,
+			"color": 0,
+			"origin": [
+				1.9,
+				12,
+				0
+			],
+			"uv_offset": [
+				0,
+				16
+			],
+			"faces": {
+				"north": {
+					"uv": [
+						8,
+						20,
+						4,
+						32
+					],
+					"texture": "#zombie"
+				},
+				"east": {
+					"uv": [
+						0,
+						20,
+						4,
+						32
+					],
+					"texture": "#zombie"
+				},
+				"south": {
+					"uv": [
+						16,
+						20,
+						12,
+						32
+					],
+					"texture": "#zombie"
+				},
+				"west": {
+					"uv": [
+						12,
+						20,
+						8,
+						32
+					],
+					"texture": "#zombie"
+				},
+				"up": {
+					"uv": [
+						8,
+						16,
+						4,
+						20
+					],
+					"texture": "#zombie"
+				},
+				"down": {
+					"uv": [
+						12,
+						16,
+						8,
+						20
+					],
+					"texture": "#zombie",
+					"rotation": 180
+				}
+			},
+			"type": "cube",
+			"uuid": "c75a3a19-8f99-4186-bcce-00ffad22b2da"
+		}
+	],
+	"outliner": [
+		{
+			"name": "head",
+			"origin": [
+				0,
+				24,
+				0
+			],
+			"color": 0,
+			"uuid": "53cb9ff7-3bb9-46bb-87be-fff7aef09328",
+			"export": true,
+			"isOpen": true,
+			"locked": false,
+			"visibility": true,
+			"autouv": 0,
+			"children": [
+				"a65dd450-2e1a-4a62-b7a0-31ae0bda1d7e",
+				"869ed660-1f1b-4e8a-a0aa-dd28dc95b490"
+			]
+		},
+		{
+			"name": "body",
+			"origin": [
+				0,
+				24,
+				0
+			],
+			"color": 0,
+			"uuid": "55cdf18b-d765-434f-bb44-72b664d793a8",
+			"export": true,
+			"isOpen": true,
+			"locked": false,
+			"visibility": true,
+			"autouv": 0,
+			"children": [
+				"05c3bdc1-952f-4afc-9d02-fb8de4421c63"
+			]
+		},
+		{
+			"name": "right_arm",
+			"origin": [
+				-5,
+				22,
+				0
+			],
+			"color": 0,
+			"uuid": "3728e567-fb67-4f4c-903d-b674eb11e970",
+			"export": true,
+			"isOpen": true,
+			"locked": false,
+			"visibility": true,
+			"autouv": 0,
+			"children": [
+				"89cfcb3b-2fe2-4630-81dd-93c3a259cd34"
+			]
+		},
+		{
+			"name": "left_arm",
+			"origin": [
+				5,
+				22,
+				0
+			],
+			"color": 0,
+			"uuid": "6c27164f-9f53-45d1-8716-2b7f72cd29fa",
+			"export": true,
+			"isOpen": true,
+			"locked": false,
+			"visibility": true,
+			"autouv": 0,
+			"children": [
+				"0b3a03c8-baca-4fcb-b18a-10cad5777b1c"
+			]
+		},
+		{
+			"name": "right_leg",
+			"origin": [
+				-1.9,
+				12,
+				0
+			],
+			"color": 0,
+			"uuid": "5f510009-0280-42f6-add8-0bcd5d66afb5",
+			"export": true,
+			"isOpen": true,
+			"locked": false,
+			"visibility": true,
+			"autouv": 0,
+			"children": [
+				"7f020d83-de76-4040-875a-b68c2e204e8a"
+			]
+		},
+		{
+			"name": "left_leg",
+			"origin": [
+				1.9,
+				12,
+				0
+			],
+			"color": 0,
+			"uuid": "f4a0d33d-915f-4852-b873-82cf5e9f6c93",
+			"export": true,
+			"isOpen": true,
+			"locked": false,
+			"visibility": true,
+			"autouv": 0,
+			"children": [
+				"c75a3a19-8f99-4186-bcce-00ffad22b2da"
+			]
+		}
+	],
+	"textures": [
+		{
+			"path": "/Users/colton/Cursor/minecraft-mods/mob_loot_rebalance/plan/elite-skins/zombie_elite.png",
+			"name": "zombie_elite.png",
+			"folder": "entity/zombie",
+			"namespace": "mob_loot_rebalance",
+			"id": "zombie",
+			"particle": true,
+			"relative_path": "./zombie_elite.png",
+			"source": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAMAAACdt4HsAAAAclBMVEUAAAA7Yi8+aS1JcTVOezZae0hph1ZnkFZxlVt5nGVtlVtvlVyPj496d3dra2thYWFMTEw/Pz9IdTJXdUcAmZkAW1sAaGgAf38Anp4AqKgAr68AzMw2WiU4UiZKaS0aGhomIVsoKChWScxGOqU6MYkwKHLgqjLeAAAAAXRSTlMAQObYZgAAAfhJREFUeNrt1bFuXFUUheFv7XsHCZOkiJAMIUmBxPs/EAVNQEQyFUkTe84CgaNpbI3dz9dsaRe/tk5zAjBNpWlA62l2AEmlUpB6mgEwhNTbf6lnBwRTzzQArREC5NkBLVrPtAPMSnOM+IDk2YFqsTUQT5WYdAmFae8XnSXJ3bnAqEhWZ3NciaqYY5rm7KNsjGIOh+SbVCtTabakczYwdEam4djBlDTRxrnAdGZa+uba+vFN3a9M20ydkYjQGbcO1gpViaZydMbMvNtnMq/z/n1eT2b2dzOT2fZ9mzgjMSqttz68/Z1ULCRaPReAn1H8BvgpoFeAXwFvoh+jRyf741l9YJ10DSfjmbrU2QvqQY02wUl+QcvcsuETa8uf0/7QIhLVHm1b9Hg//3jggsOCmuT6o+vkWEZI2VCnCRiok4K5vg6FlCYeMRTYkSgrNaKlaamsdn1pv3ydALsC7BJSUFAU1vyFHXfYnEyLBK1VPTUaApBMx0STmQnASKvVUm0gGkIIlVa1VqReNI/8CyQJhCaIEk1jSLR/B8AkAfI/KAikIoFGREoUYL/xPYgbR3wrlEoKFSqV6NylSROAvblxXMlG4dXt4XYHn+PKoT5rX5jSrKluXn4qwGgruR8JDv3Pd+uVg/bqqi/aJpYsk1Zfuri4uLi4uLh4xD/4aBp548FwwgAAAABJRU5ErkJggg==",
+			"uuid": "869687c9-22e5-4d1b-ae9d-9c5d1c31a138"
+		}
+	]
+}

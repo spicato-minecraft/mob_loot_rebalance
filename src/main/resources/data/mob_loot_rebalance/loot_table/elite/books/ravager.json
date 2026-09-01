@@ -1,0 +1,130 @@
+{
+  "pools": [
+    {
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "minecraft:empty",
+          "weight": 50
+        },
+        {
+          "type": "minecraft:item",
+          "name": "minecraft:enchanted_book",
+          "weight": 50,
+          "functions": [
+            {
+              "function": "minecraft:set_enchantments",
+              "add": false,
+              "enchantments": {
+                "minecraft:protection": 1.0
+              }
+            }
+          ]
+        },
+        {
+          "type": "minecraft:item",
+          "name": "minecraft:enchanted_book",
+          "weight": 50,
+          "functions": [
+            {
+              "function": "minecraft:set_enchantments",
+              "add": false,
+              "enchantments": {
+                "minecraft:sharpness": 1.0
+              }
+            }
+          ],
+          "conditions": [
+            {
+              "condition": "mob_loot_rebalance:kill_method",
+              "method": "melee"
+            }
+          ]
+        },
+        {
+          "type": "minecraft:item",
+          "name": "minecraft:enchanted_book",
+          "weight": 50,
+          "functions": [
+            {
+              "function": "minecraft:set_enchantments",
+              "add": false,
+              "enchantments": {
+                "minecraft:power": 1.0
+              }
+            }
+          ],
+          "conditions": [
+            {
+              "condition": "mob_loot_rebalance:kill_method",
+              "method": "ranged"
+            }
+          ]
+        },
+        {
+          "type": "minecraft:item",
+          "name": "minecraft:enchanted_book",
+          "weight": 2,
+          "functions": [
+            {
+              "function": "minecraft:set_enchantments",
+              "add": false,
+              "enchantments": {
+                "minecraft:mending": 1.0
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "minecraft:empty",
+          "weight": 65
+        },
+        {
+          "type": "minecraft:item",
+          "name": "minecraft:enchanted_book",
+          "weight": 21,
+          "functions": [
+            {
+              "function": "minecraft:set_enchantments",
+              "add": false,
+              "enchantments": {
+                "minecraft:knockback": 1.0
+              }
+            }
+          ],
+          "conditions": [
+            {
+              "condition": "mob_loot_rebalance:kill_method",
+              "method": "melee"
+            }
+          ]
+        },
+        {
+          "type": "minecraft:item",
+          "name": "minecraft:enchanted_book",
+          "weight": 14,
+          "functions": [
+            {
+              "function": "minecraft:set_enchantments",
+              "add": false,
+              "enchantments": {
+                "minecraft:breach": 1.0
+              }
+            }
+          ],
+          "conditions": [
+            {
+              "condition": "mob_loot_rebalance:kill_method",
+              "method": "melee"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
