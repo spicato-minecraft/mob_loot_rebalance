@@ -107,7 +107,9 @@ Vanilla provides `EntitySpawnReason.isSpawner(reason)`, which returns true for `
 
 No Fabric event exposes spawn reason directly; a server mixin is the reliable hook. **Spike result: no blockers.**
 
-Elite visual cues: **1.3× scale** plus sparse **red dust specks** (`minecraft:dust`, default color `0xFFFF0000`, scale `0.4`). Other simple particles still work via `elites.ambient_particle` (e.g. `minecraft:soul`). Optional `elites.uat_glow` re-enables outline glow for spawn-rate debugging. Stats remain 1.5× health/damage, light knockback resistance, and creeper explosion scaling.
+Elite visual cues (loot-only fallback): **1.3× scale** plus sparse **red dust specks** (`minecraft:dust`, default color `0xFFFF0000`, scale `0.4`). Other simple particles still work via `elites.ambient_particle` (e.g. `minecraft:soul`). Optional `elites.uat_glow` re-enables outline glow for spawn-rate debugging. Stats remain 1.5× health/damage, light knockback resistance, and creeper explosion scaling.
+
+When **Mob Combat Rebalance** (`mob_combat_rebalance`) is loaded, this JAR still rolls and persists the elite flag and still pays loot/XP/chime, but it **mutes** dust, 1.5× stats, and creeper blast scaling so MCR can replace combat presentation. When **Mob Size Diversity** (`mob_size_diversity`) is loaded, this JAR also **skips the binary 1.3× scale stamp** so rolled size bands can own `Attributes.SCALE` without stacking. Size-only worlds keep dust and 1.5× stats. Muting the stamp is anti-stack, not “elites must not be larger.” The flag is the Fabric attachment `mob_loot_rebalance:elite`.
 
 ### XP uplift pillar (Phase 2)
 

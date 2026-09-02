@@ -25,17 +25,21 @@ public final class EliteModifiers {
 	public static final double EXPLOSION_MULTIPLIER = 1.5;
 	public static final double KNOCKBACK_RESISTANCE_BONUS = 0.2;
 
-	private static final Identifier HEALTH_MODIFIER_ID = id("health");
-	private static final Identifier DAMAGE_MODIFIER_ID = id("damage");
-	private static final Identifier SCALE_MODIFIER_ID = id("scale");
-	private static final Identifier KNOCKBACK_RESISTANCE_MODIFIER_ID = id("knockback_resistance");
+	static final Identifier HEALTH_MODIFIER_ID = id("health");
+	static final Identifier DAMAGE_MODIFIER_ID = id("damage");
+	static final Identifier SCALE_MODIFIER_ID = id("scale");
+	static final Identifier KNOCKBACK_RESISTANCE_MODIFIER_ID = id("knockback_resistance");
 
 	private EliteModifiers() {
 	}
 
 	public static void apply(Mob mob, ServerLevel level) {
-		applyAttributes(mob);
-		applyCreeperExplosionRadius(mob);
+		if (EliteCombatHandshake.shouldApplyFallbackCombatStats()) {
+			applyCombatStats(mob);
+		}
+		if (EliteCombatHandshake.shouldApplyFallbackScale()) {
+			applyScale(mob);
+		}
 		syncUatGlow(mob);
 	}
 
@@ -43,24 +47,27 @@ public final class EliteModifiers {
 		if (!EliteState.isElite(mob)) {
 			return;
 		}
-		if (!hasEliteModifiers(mob)) {
-			applyAttributes(mob);
-			applyCreeperExplosionRadius(mob);
+		boolean combat = EliteCombatHandshake.shouldApplyFallbackCombatStats();
+		boolean scale = EliteCombatHandshake.shouldApplyFallbackScale();
+		if (!combat && hasCombatStatModifiers(mob)) {
+			removeCombatStats(mob);
+		}
+		if (!scale && hasScaleModifier(mob)) {
+			removeScale(mob);
+		}
+		if (combat && !hasCombatStatModifiers(mob)) {
+			applyCombatStats(mob);
+		}
+		if (scale && !hasScaleModifier(mob)) {
+			applyScale(mob);
 		}
 		syncUatGlow(mob);
 	}
 
 	public static void remove(Mob mob) {
-		removeAttributeModifier(mob, Attributes.MAX_HEALTH, HEALTH_MODIFIER_ID);
-		removeAttributeModifier(mob, Attributes.ATTACK_DAMAGE, DAMAGE_MODIFIER_ID);
-		removeAttributeModifier(mob, Attributes.SCALE, SCALE_MODIFIER_ID);
-		removeAttributeModifier(mob, Attributes.KNOCKBACK_RESISTANCE, KNOCKBACK_RESISTANCE_MODIFIER_ID);
+		removeCombatStats(mob);
+		removeScale(mob);
 		mob.removeEffect(MobEffects.GLOWING);
-		if (mob instanceof Creeper creeper) {
-			CreeperAccessor accessor = (CreeperAccessor) creeper;
-			int restored = Math.max(1, Math.round(accessor.mob_loot_rebalance$getExplosionRadius() / (float) EXPLOSION_MULTIPLIER));
-			accessor.mob_loot_rebalance$setExplosionRadius(restored);
-		}
 	}
 
 	static void syncUatGlow(Mob mob) {
@@ -73,12 +80,12 @@ public final class EliteModifiers {
 		}
 	}
 
-	private static void applyAttributes(Mob mob) {
+	private static void applyCombatStats(Mob mob) {
 		addMultiplierModifier(mob, Attributes.MAX_HEALTH, HEALTH_MODIFIER_ID, HEALTH_MULTIPLIER);
 		addMultiplierModifier(mob, Attributes.ATTACK_DAMAGE, DAMAGE_MODIFIER_ID, DAMAGE_MULTIPLIER);
-		addMultiplierModifier(mob, Attributes.SCALE, SCALE_MODIFIER_ID, SCALE_MULTIPLIER);
 		addFlatModifier(mob, Attributes.KNOCKBACK_RESISTANCE, KNOCKBACK_RESISTANCE_MODIFIER_ID, KNOCKBACK_RESISTANCE_BONUS);
 		mob.setHealth(mob.getMaxHealth());
+		applyCreeperExplosionRadius(mob);
 	}
 
 	private static void applyCreeperExplosionRadius(Mob mob) {
@@ -89,9 +96,33 @@ public final class EliteModifiers {
 		}
 	}
 
-	private static boolean hasEliteModifiers(Mob mob) {
+	private static void applyScale(Mob mob) {
+		addMultiplierModifier(mob, Attributes.SCALE, SCALE_MODIFIER_ID, SCALE_MULTIPLIER);
+	}
+
+	private static void removeCombatStats(Mob mob) {
+		removeAttributeModifier(mob, Attributes.MAX_HEALTH, HEALTH_MODIFIER_ID);
+		removeAttributeModifier(mob, Attributes.ATTACK_DAMAGE, DAMAGE_MODIFIER_ID);
+		removeAttributeModifier(mob, Attributes.KNOCKBACK_RESISTANCE, KNOCKBACK_RESISTANCE_MODIFIER_ID);
+		if (mob instanceof Creeper creeper) {
+			CreeperAccessor accessor = (CreeperAccessor) creeper;
+			int restored = Math.max(1, Math.round(accessor.mob_loot_rebalance$getExplosionRadius() / (float) EXPLOSION_MULTIPLIER));
+			accessor.mob_loot_rebalance$setExplosionRadius(restored);
+		}
+	}
+
+	private static void removeScale(Mob mob) {
+		removeAttributeModifier(mob, Attributes.SCALE, SCALE_MODIFIER_ID);
+	}
+
+	public static boolean hasCombatStatModifiers(Mob mob) {
 		AttributeInstance health = mob.getAttribute(Attributes.MAX_HEALTH);
 		return health != null && health.getModifier(HEALTH_MODIFIER_ID) != null;
+	}
+
+	public static boolean hasScaleModifier(Mob mob) {
+		AttributeInstance scale = mob.getAttribute(Attributes.SCALE);
+		return scale != null && scale.getModifier(SCALE_MODIFIER_ID) != null;
 	}
 
 	private static void addMultiplierModifier(Mob mob, net.minecraft.core.Holder<net.minecraft.world.entity.ai.attributes.Attribute> attribute, Identifier modifierId, double multiplier) {

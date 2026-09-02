@@ -11,6 +11,8 @@ import net.minecraft.resources.Identifier;
 /**
  * Fabric Data Attachment for elite mob flag (AC-4).
  * Persisted on entity save/load; synced to clients for visuals.
+ * <p>Public handshake id: {@code mob_loot_rebalance:elite}. Combat Rebalance
+ * reads this flag at runtime and must not re-register it.
  */
 public final class EliteAttachments {
 

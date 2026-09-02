@@ -26,5 +26,9 @@
 		"minecraft": "~1.21.11",
 		"java": ">=21",
 		"fabric-api": "*"
+	},
+	"suggests": {
+		"mob_combat_rebalance": "*",
+		"mob_size_diversity": "*"
 	}
 }

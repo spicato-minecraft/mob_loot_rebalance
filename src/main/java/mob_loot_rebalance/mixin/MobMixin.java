@@ -1,6 +1,7 @@
 package mob_loot_rebalance.mixin;
 
 import mob_loot_rebalance.elite.EliteAmbientParticles;
+import mob_loot_rebalance.elite.EliteCombatHandshake;
 import mob_loot_rebalance.elite.EliteModifiers;
 import mob_loot_rebalance.elite.EliteSpawnService;
 import mob_loot_rebalance.elite.EliteState;
@@ -49,6 +50,9 @@ public abstract class MobMixin {
 	private void mob_loot_rebalance$eliteAmbientParticles(CallbackInfo ci) {
 		Mob self = (Mob) (Object) this;
 		if (self.level().isClientSide() || !EliteState.isElite(self)) {
+			return;
+		}
+		if (!EliteCombatHandshake.shouldApplyFallbackPresentation()) {
 			return;
 		}
 		ModConfig config = ModConfig.get();
