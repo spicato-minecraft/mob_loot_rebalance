@@ -24,6 +24,8 @@ public final class ModConfig {
 	private static final Gson GSON = new GsonBuilder().setPrettyPrinting().create();
 	private static final String FILE_NAME = Mob_loot_rebalance.MOD_ID + ".json";
 	private static volatile ModConfig instance;
+	private static volatile long loadedFileMtime = Long.MIN_VALUE;
+	private static volatile boolean skipDiskReload;
 
 	public XpConfig xp = new XpConfig();
 	public ElitesConfig elites = new ElitesConfig();
@@ -33,8 +35,13 @@ public final class ModConfig {
 	public FeedbackConfig feedback = new FeedbackConfig();
 
 	public static ModConfig get() {
+		if (skipDiskReload) {
+			return instance;
+		}
+		Path path = FabricLoader.getInstance().getConfigDir().resolve(FILE_NAME);
+		long mtime = fileMtime(path);
 		ModConfig current = instance;
-		if (current == null) {
+		if (current == null || mtime != loadedFileMtime) {
 			current = load();
 			instance = current;
 		}
@@ -43,15 +50,41 @@ public final class ModConfig {
 
 	public static void set(ModConfig config) {
 		instance = config;
+		skipDiskReload = false;
 	}
 
 	/** Test-only override; does not write to disk. */
 	public static void setForTest(ModConfig config) {
 		instance = config;
+		skipDiskReload = true;
+	}
+
+	/**
+	 * Force a re-read from {@code config/mob_loot_rebalance.json}. Ignores mtime so
+	 * Apply can refresh even when the filesystem clock does not tick.
+	 */
+	public static ModConfig reload() {
+		skipDiskReload = false;
+		instance = load();
+		return instance;
+	}
+
+	/**
+	 * Force a re-read from {@code configDir/mob_loot_rebalance.json} into the
+	 * process singleton. {@link #get()} will not replace it from the game config
+	 * dir until {@link #reload()} or {@link #set}.
+	 */
+	public static ModConfig reloadFrom(Path configDir) {
+		skipDiskReload = true;
+		instance = loadFrom(configDir.resolve(FILE_NAME));
+		return instance;
 	}
 
 	public static ModConfig load() {
-		Path path = FabricLoader.getInstance().getConfigDir().resolve(FILE_NAME);
+		return loadFrom(FabricLoader.getInstance().getConfigDir().resolve(FILE_NAME));
+	}
+
+	static ModConfig loadFrom(Path path) {
 		ModConfig config = defaults();
 		if (Files.isRegularFile(path)) {
 			try (Reader reader = Files.newBufferedReader(path)) {
@@ -62,7 +95,7 @@ public final class ModConfig {
 					boolean addedKeys = applyDefaultsForMissingKeys(root, config);
 					normalize(config);
 					if (addedKeys) {
-						config.save();
+						config.saveTo(path);
 					}
 				}
 			} catch (IOException | RuntimeException e) {
@@ -73,12 +106,23 @@ public final class ModConfig {
 			try {
 				Files.createDirectories(path.getParent());
 				normalize(config);
-				config.save();
+				config.saveTo(path);
 			} catch (IOException e) {
 				LOGGER.warn("Could not write default config to {}", path, e);
 			}
 		}
+		loadedFileMtime = fileMtime(path);
 		return config;
+	}
+
+	private static long fileMtime(Path path) {
+		try {
+			if (Files.isRegularFile(path)) {
+				return Files.getLastModifiedTime(path).toMillis();
+			}
+		} catch (IOException ignored) {
+		}
+		return 0L;
 	}
 
 	public static ModConfig defaults() {
@@ -99,9 +143,15 @@ public final class ModConfig {
 	}
 
 	public void save() {
-		Path path = FabricLoader.getInstance().getConfigDir().resolve(FILE_NAME);
-		try (Writer writer = Files.newBufferedWriter(path)) {
-			GSON.toJson(this, writer);
+		saveTo(FabricLoader.getInstance().getConfigDir().resolve(FILE_NAME));
+	}
+
+	public void saveTo(Path path) {
+		try {
+			Files.createDirectories(path.getParent());
+			try (Writer writer = Files.newBufferedWriter(path)) {
+				GSON.toJson(this, writer);
+			}
 		} catch (IOException e) {
 			LOGGER.error("Failed to save config {}", path, e);
 		}
@@ -155,15 +205,15 @@ public final class ModConfig {
 				addedKeys = true;
 			}
 			if (!elites.has("particle_dust_color")) {
-				config.elites.particle_dust_color = 0xFFFF0000;
+				config.elites.particle_dust_color = 0xFFE8EEF8;
 				addedKeys = true;
 			}
 			if (!elites.has("particle_dust_scale")) {
-				config.elites.particle_dust_scale = 0.4F;
+				config.elites.particle_dust_scale = 0.5F;
 				addedKeys = true;
 			}
 			if (!elites.has("particle_interval_ticks")) {
-				config.elites.particle_interval_ticks = 30;
+				config.elites.particle_interval_ticks = 60;
 				addedKeys = true;
 			}
 		}
@@ -171,9 +221,27 @@ public final class ModConfig {
 		if (!root.has("elite_loot")) {
 			config.elite_loot = new EliteLootConfig();
 			addedKeys = true;
-		} else if (!eliteLoot.has("enabled")) {
-			config.elite_loot.enabled = true;
-			addedKeys = true;
+		} else {
+			if (!eliteLoot.has("enabled")) {
+				config.elite_loot.enabled = true;
+				addedKeys = true;
+			}
+			if (!eliteLoot.has("consolation_weight")) {
+				config.elite_loot.consolation_weight = 15;
+				addedKeys = true;
+			}
+			if (!eliteLoot.has("books_weight")) {
+				config.elite_loot.books_weight = 23;
+				addedKeys = true;
+			}
+			if (!eliteLoot.has("potions_weight")) {
+				config.elite_loot.potions_weight = 40;
+				addedKeys = true;
+			}
+			if (!eliteLoot.has("unique_weight")) {
+				config.elite_loot.unique_weight = 22;
+				addedKeys = true;
+			}
 		}
 
 		if (!root.has("kill_method")) {
@@ -262,6 +330,22 @@ public final class ModConfig {
 		if (config.feedback.elite_kill_sound == null || config.feedback.elite_kill_sound.isBlank()) {
 			config.feedback.elite_kill_sound = "minecraft:block.amethyst_block.chime";
 		}
+		config.elite_loot.consolation_weight = clampWeight(config.elite_loot.consolation_weight, "elite_loot.consolation_weight");
+		config.elite_loot.books_weight = clampWeight(config.elite_loot.books_weight, "elite_loot.books_weight");
+		config.elite_loot.potions_weight = clampWeight(config.elite_loot.potions_weight, "elite_loot.potions_weight");
+		config.elite_loot.unique_weight = clampWeight(config.elite_loot.unique_weight, "elite_loot.unique_weight");
+	}
+
+	private static int clampWeight(int value, String key) {
+		if (value < 0) {
+			LOGGER.warn("{} {} is negative; clamping to 0", key, value);
+			return 0;
+		}
+		if (value > 100) {
+			LOGGER.warn("{} {} exceeds 100; clamping to 100", key, value);
+			return 100;
+		}
+		return value;
 	}
 
 	private static JsonObject objectOrEmpty(JsonObject root, String key) {

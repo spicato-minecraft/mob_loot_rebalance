@@ -14,26 +14,26 @@ Manual verification that default elite cadence yields **about 1–2 Level I ench
 
 ## Pre-flight analysis (analytical)
 
-Model: `expectedBooks ≈ eligibleKills × elites.spawn_chance × 0.33 × 1.0167`
-(book slot 0.33; one core roll at 2/3 + theme 0.35 → **0.3355 books per elite**).
+Model: `expectedBooks ≈ eligibleKills × elites.spawn_chance × 0.23 × 1.0167`
+(book slot 0.23; one core roll at 2/3 + theme 0.35 → **0.2338 books per elite**).
 Ranged-only themes (Punch, Infinity, …) do not contribute on melee kills. A book slot cannot drop both an armor book and Sharpness/Power.
 
 | `spawn_chance` | 80 kills/night | 100 kills/night | 120 kills/night |
 |----------------|----------------|-----------------|-----------------|
-| **0.14** (current default) | 3.76 | **4.70** | 5.64 |
+| **0.14** (current default) | 2.62 | **3.27** | 3.93 |
 | **0.07** | 1.88 | 2.35 | 2.82 |
 | **0.03** | 0.81 | 1.01 | 1.21 |
 | **0.04** (tuning candidate) | 1.07 | 1.34 | 1.61 |
 | **0.05** | 1.34 | 1.68 | 2.01 |
 | **0.06** | 1.61 | 2.01 | 2.42 |
 
-At ~100 eligible kills, default **14%** yields **~4.70 books/night** (above the 1–2 band). Spawner/trial rate is unchanged at 0.02. **Retune `elites.spawn_chance` in UAT** if nights feel too generous.
+At ~100 eligible kills, default **14%** yields **~3.27 books/night** (above the 1–2 band). Spawner/trial rate is unchanged at 0.02. **Retune `elites.spawn_chance` in UAT** if nights feel too generous.
 
 Monte Carlo (5 000 simulated nights @ 100 kills, seed `0xAC12`):
 
 | Rate | Mean books/night | Nights with ≥1 book |
 |------|------------------|------------------------|
-| 0.14 | ~4.70 | (33% book slot; core + theme inner rolls) |
+| 0.14 | ~3.27 | (23% book slot; core + theme inner rolls) |
 | 0.07 | ~2.35 | |
 | 0.03 | ~1.01 | |
 | 0.04 | ~1.34 | |
@@ -52,10 +52,10 @@ Run `./gradlew test --tests HuntingNightCadenceModelTest` to reproduce.
 Formula for quick estimate:
 
 ```text
-spawn_chance ≈ targetBooks / (eligibleKills × 0.33 × 1.0167)
+spawn_chance ≈ targetBooks / (eligibleKills × 0.23 × 1.0167)
 ```
 
-Example: 100 kills, target 1.5 books → `1.5 / 33.55 ≈ 0.045`. Retune after trials; do not silently edit config from this model.
+Example: 100 kills, target 1.5 books → `1.5 / 23.38 ≈ 0.064`. Retune after trials; do not silently edit config from this model.
 
 ## Trial protocol (each night)
 

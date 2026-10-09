@@ -61,6 +61,26 @@ class EliteNestedLootPoolTest {
 	);
 
 	@Test
+	void bookEntriesUseFixedEnchantBookLootFunction() {
+		for (String mobId : MOB_TABLES) {
+			String resourcePath = "data/mob_loot_rebalance/loot_table/elite/books/" + mobId + ".json";
+			JsonObject table = loadLootTable(resourcePath);
+			assertFalse(
+					table.toString().contains("set_enchantments"),
+					mobId + " must not use set_enchantments on enchanted_book"
+			);
+			assertFalse(
+					table.toString().contains("set_components"),
+					mobId + " must use mob_loot_rebalance:fixed_enchant_book (same stack shape as structure loot)"
+			);
+			assertTrue(
+					table.toString().contains("mob_loot_rebalance:fixed_enchant_book"),
+					mobId + " book tables must apply fixed_enchant_book"
+			);
+		}
+	}
+
+	@Test
 	void bookTablesHaveCoreAndThemePools() {
 		for (String mobId : MOB_TABLES) {
 			String resourcePath = "data/mob_loot_rebalance/loot_table/elite/books/" + mobId + ".json";
@@ -146,14 +166,13 @@ class EliteNestedLootPoolTest {
 		JsonArray functions = entry.getAsJsonArray("functions");
 		for (var element : functions) {
 			JsonObject function = element.getAsJsonObject();
-			if (!"minecraft:set_enchantments".equals(function.get("function").getAsString())) {
+			if (!"mob_loot_rebalance:fixed_enchant_book".equals(function.get("function").getAsString())) {
 				continue;
 			}
-			JsonObject enchantments = function.getAsJsonObject("enchantments");
-			if (enchantments == null || enchantments.entrySet().isEmpty()) {
+			if (!function.has("enchantment")) {
 				continue;
 			}
-			return enchantments.entrySet().iterator().next().getKey();
+			return function.get("enchantment").getAsString();
 		}
 		return null;
 	}

@@ -9,14 +9,15 @@ import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.core.particles.SimpleParticleType;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.Identifier;
-import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.Mob;
+import net.minecraft.world.level.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 /**
  * Sparse ambient vanilla particles on elite mobs (AC-5 visual cue).
+ * Spawned on the client only (see spyglass gate).
  */
 public final class EliteAmbientParticles {
 
@@ -27,22 +28,29 @@ public final class EliteAmbientParticles {
 	private EliteAmbientParticles() {
 	}
 
-	public static void emit(Mob mob, ServerLevel level, ElitesConfig config) {
-		if (!shouldEmit(config)) {
+	public static void emit(Mob mob, Level level, ElitesConfig config) {
+		if (!shouldEmit(config) || !level.isClientSide()) {
 			return;
 		}
 
 		ParticleOptions particle = resolveOptions(config);
-		RandomSource random = level.random;
+		RandomSource random = mob.getRandom();
 		double width = mob.getBbWidth();
 		double x = mob.getX() + (random.nextDouble() - 0.5) * width;
 		double y = mob.getY() + random.nextDouble() * mob.getBbHeight() * 0.75 + 0.1;
 		double z = mob.getZ() + (random.nextDouble() - 0.5) * width;
-		level.sendParticles(particle, true, false, x, y, z, 1, 0.0, 0.05, 0.0, 0.0);
+		level.addParticle(particle, true, true, x, y, z, 0.0, 0.05, 0.0);
+		if (pairsFireflyGlow(config)) {
+			level.addParticle(ParticleTypes.FIREFLY, true, true, x, y, z, 0.0, 0.02, 0.0);
+		}
 	}
 
 	public static boolean shouldEmit(ElitesConfig config) {
 		return config.particle_interval_ticks > 0 && config.ambient_particle != null && !config.ambient_particle.isBlank();
+	}
+
+	static boolean pairsFireflyGlow(ElitesConfig config) {
+		return DUST_PARTICLE.equals(parseParticleId(config.ambient_particle));
 	}
 
 	static ParticleOptions resolveOptions(ElitesConfig config) {
@@ -56,7 +64,7 @@ public final class EliteAmbientParticles {
 			return simple;
 		}
 
-		LOGGER.warn("Unsupported elite ambient particle {}; falling back to red dust", id);
+		LOGGER.warn("Unsupported elite ambient particle {}; falling back to silvery dust", id);
 		return dustOptions(config);
 	}
 

@@ -10,7 +10,6 @@ import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.Identifier;
 import net.minecraft.world.level.storage.loot.LootContext;
 import net.minecraft.world.level.storage.loot.predicates.LootItemCondition;
-import net.minecraft.world.level.storage.loot.predicates.LootItemConditionType;
 
 import java.util.Locale;
 
@@ -26,13 +25,11 @@ public record KillMethodLootCondition(KillMethod method) implements LootItemCond
 					.forGetter(KillMethodLootCondition::method)
 	).apply(instance, KillMethodLootCondition::new));
 
-	public static final LootItemConditionType TYPE = new LootItemConditionType(CODEC);
-
 	public static void register() {
 		Registry.register(
 				BuiltInRegistries.LOOT_CONDITION_TYPE,
 				Identifier.fromNamespaceAndPath(Mob_loot_rebalance.MOD_ID, "kill_method"),
-				TYPE
+				CODEC
 		);
 	}
 
@@ -43,8 +40,8 @@ public record KillMethodLootCondition(KillMethod method) implements LootItemCond
 	}
 
 	@Override
-	public LootItemConditionType getType() {
-		return TYPE;
+	public MapCodec<KillMethodLootCondition> codec() {
+		return CODEC;
 	}
 
 	@Override

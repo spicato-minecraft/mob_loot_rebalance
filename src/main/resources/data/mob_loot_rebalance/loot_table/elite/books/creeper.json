@@ -13,11 +13,9 @@
           "weight": 25,
           "functions": [
             {
-              "function": "minecraft:set_enchantments",
-              "add": false,
-              "enchantments": {
-                "minecraft:protection": 1.0
-              }
+              "function": "mob_loot_rebalance:fixed_enchant_book",
+              "enchantment": "minecraft:protection",
+              "level": 1
             }
           ]
         },
@@ -27,11 +25,9 @@
           "weight": 25,
           "functions": [
             {
-              "function": "minecraft:set_enchantments",
-              "add": false,
-              "enchantments": {
-                "minecraft:blast_protection": 1.0
-              }
+              "function": "mob_loot_rebalance:fixed_enchant_book",
+              "enchantment": "minecraft:blast_protection",
+              "level": 1
             }
           ]
         },
@@ -41,11 +37,9 @@
           "weight": 50,
           "functions": [
             {
-              "function": "minecraft:set_enchantments",
-              "add": false,
-              "enchantments": {
-                "minecraft:sharpness": 1.0
-              }
+              "function": "mob_loot_rebalance:fixed_enchant_book",
+              "enchantment": "minecraft:sharpness",
+              "level": 1
             }
           ],
           "conditions": [
@@ -61,11 +55,9 @@
           "weight": 50,
           "functions": [
             {
-              "function": "minecraft:set_enchantments",
-              "add": false,
-              "enchantments": {
-                "minecraft:power": 1.0
-              }
+              "function": "mob_loot_rebalance:fixed_enchant_book",
+              "enchantment": "minecraft:power",
+              "level": 1
             }
           ],
           "conditions": [
@@ -81,11 +73,9 @@
           "weight": 2,
           "functions": [
             {
-              "function": "minecraft:set_enchantments",
-              "add": false,
-              "enchantments": {
-                "minecraft:mending": 1.0
-              }
+              "function": "mob_loot_rebalance:fixed_enchant_book",
+              "enchantment": "minecraft:mending",
+              "level": 1
             }
           ]
         }
@@ -104,11 +94,9 @@
           "weight": 35,
           "functions": [
             {
-              "function": "minecraft:set_enchantments",
-              "add": false,
-              "enchantments": {
-                "minecraft:punch": 1.0
-              }
+              "function": "mob_loot_rebalance:fixed_enchant_book",
+              "enchantment": "minecraft:punch",
+              "level": 1
             }
           ],
           "conditions": [

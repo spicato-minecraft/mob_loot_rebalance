@@ -70,13 +70,15 @@ public final class EliteModifiers {
 		mob.removeEffect(MobEffects.GLOWING);
 	}
 
-	static void syncUatGlow(Mob mob) {
+	public static void syncUatGlow(Mob mob) {
 		if (ModConfig.get().elites.uat_glow) {
 			if (!mob.hasEffect(MobEffects.GLOWING)) {
 				mob.addEffect(new MobEffectInstance(MobEffects.GLOWING, MobEffectInstance.INFINITE_DURATION, 0, false, false, true));
 			}
+			mob.setGlowingTag(true);
 		} else {
 			mob.removeEffect(MobEffects.GLOWING);
+			mob.setGlowingTag(false);
 		}
 	}
 

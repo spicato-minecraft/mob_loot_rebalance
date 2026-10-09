@@ -21,13 +21,13 @@ class EliteAmbientParticlesTest {
 	}
 
 	@Test
-	void resolvesRedDustByDefault() {
+	void resolvesSilveryDustByDefault() {
 		ElitesConfig config = new ElitesConfig();
 		assertInstanceOf(DustParticleOptions.class, EliteAmbientParticles.resolveOptions(config));
 		DustParticleOptions dust = (DustParticleOptions) EliteAmbientParticles.resolveOptions(config);
-		assertEquals(1.0F, dust.getColor().x(), 0.01F);
-		assertEquals(0.0F, dust.getColor().y(), 0.01F);
-		assertEquals(0.0F, dust.getColor().z(), 0.01F);
+		assertEquals(232 / 255.0F, dust.getColor().x(), 0.01F);
+		assertEquals(238 / 255.0F, dust.getColor().y(), 0.01F);
+		assertEquals(248 / 255.0F, dust.getColor().z(), 0.01F);
 	}
 
 	@Test
@@ -38,7 +38,7 @@ class EliteAmbientParticlesTest {
 	}
 
 	@Test
-	void fallsBackToRedDustForUnknownParticle() {
+	void fallsBackToConfiguredDustForUnknownParticle() {
 		ElitesConfig config = new ElitesConfig();
 		config.ambient_particle = "minecraft:not_a_real_particle";
 		assertInstanceOf(DustParticleOptions.class, EliteAmbientParticles.resolveOptions(config));
@@ -52,8 +52,23 @@ class EliteAmbientParticlesTest {
 		config.particle_interval_ticks = 0;
 		assertFalse(EliteAmbientParticles.shouldEmit(config));
 
-		config.particle_interval_ticks = 30;
+		config.particle_interval_ticks = 60;
 		config.ambient_particle = " ";
 		assertFalse(EliteAmbientParticles.shouldEmit(config));
+	}
+
+	@Test
+	void defaultDustPairsFireflyGlow() {
+		ElitesConfig config = new ElitesConfig();
+		assertTrue(EliteAmbientParticles.pairsFireflyGlow(config));
+
+		config.ambient_particle = "minecraft:soul";
+		assertFalse(EliteAmbientParticles.pairsFireflyGlow(config));
+	}
+
+	@Test
+	void eliteFireflyLifetimeIsShorterThanDefaultEmitInterval() {
+		assertTrue(EliteParticleTypes.ELITE_FIREFLY_LIFETIME_TICKS < 60);
+		assertTrue(EliteParticleTypes.ELITE_FIREFLY_LIFETIME_TICKS > 0);
 	}
 }

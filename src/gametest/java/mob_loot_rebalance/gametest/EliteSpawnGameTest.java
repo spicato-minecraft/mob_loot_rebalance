@@ -4,6 +4,7 @@ import mob_loot_rebalance.config.ModConfig;
 import net.fabricmc.fabric.api.gametest.v1.GameTest;
 import net.minecraft.core.BlockPos;
 import net.minecraft.gametest.framework.GameTestHelper;
+import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.EntitySpawnReason;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.Mob;
@@ -131,6 +132,29 @@ public class EliteSpawnGameTest {
 				new BlockPos(1, 1, 1)
 		);
 		EliteSpawnGameTestHelper.assertElite(baby, false);
+		context.succeed();
+	}
+
+	@GameTest(maxTicks = 100)
+	public void eliteHasNoGlowWhenUatGlowOff(GameTestHelper context) {
+		ModConfig config = EliteSpawnGameTestHelper.applyEliteSpawnTestConfig();
+		config.elites.uat_glow = false;
+		ModConfig.setForTest(config);
+		EliteSpawnGameTestHelper.buildFloor(context, 2);
+
+		Mob zombie = EliteSpawnGameTestHelper.spawnAdultMob(
+				context,
+				EntityType.ZOMBIE,
+				EntitySpawnReason.NATURAL,
+				new BlockPos(1, 1, 1)
+		);
+		EliteSpawnGameTestHelper.assertElite(zombie, true);
+		if (zombie.hasEffect(MobEffects.GLOWING) || zombie.hasGlowingTag()) {
+			throw EliteSpawnGameTestHelper.fail(
+					"uat_glow=false but elite has glowing effect=" + zombie.hasEffect(MobEffects.GLOWING)
+							+ " tag=" + zombie.hasGlowingTag()
+			);
+		}
 		context.succeed();
 	}
 }

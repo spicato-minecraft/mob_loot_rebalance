@@ -19,12 +19,16 @@
 		]
 	},
 	"mixins": [
-		"mob_loot_rebalance.mixins.json"
+		"mob_loot_rebalance.mixins.json",
+		{
+			"config": "mob_loot_rebalance.client.mixins.json",
+			"environment": "client"
+		}
 	],
 	"depends": {
 		"fabricloader": ">=0.19.3",
-		"minecraft": "~1.21.11",
-		"java": ">=21",
+		"minecraft": "~26.1",
+		"java": ">=25",
 		"fabric-api": "*"
 	},
 	"suggests": {

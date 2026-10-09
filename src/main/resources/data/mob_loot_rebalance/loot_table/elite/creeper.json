@@ -11,12 +11,12 @@
         {
           "type": "minecraft:loot_table",
           "value": "mob_loot_rebalance:elite/books/creeper",
-          "weight": 33
+          "weight": 23
         },
         {
           "type": "minecraft:loot_table",
           "value": "mob_loot_rebalance:elite/potions/creeper",
-          "weight": 30
+          "weight": 40
         },
         {
           "type": "minecraft:item",

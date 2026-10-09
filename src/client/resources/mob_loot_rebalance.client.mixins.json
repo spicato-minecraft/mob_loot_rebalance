@@ -1,0 +1,11 @@
+{
+	"required": true,
+	"package": "mob_loot_rebalance.mixin.client",
+	"compatibilityLevel": "JAVA_25",
+	"client": [
+		"MobMixinClient"
+	],
+	"injectors": {
+		"defaultRequire": 1
+	}
+}

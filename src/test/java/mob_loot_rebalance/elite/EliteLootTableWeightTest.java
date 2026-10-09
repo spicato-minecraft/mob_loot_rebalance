@@ -4,6 +4,7 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
+import mob_loot_rebalance.loot.EliteLootLayout;
 import org.junit.jupiter.api.Test;
 
 import java.io.InputStream;
@@ -77,12 +78,24 @@ class EliteLootTableWeightTest {
 			assertFalse(entries.isEmpty(), mobId + " pool must not be empty");
 
 			int totalWeight = 0;
+			int bookWeight = 0;
+			int potionWeight = 0;
 			for (JsonElement entryElement : entries) {
 				JsonObject entry = entryElement.getAsJsonObject();
 				int weight = entry.has("weight") ? entry.get("weight").getAsInt() : 1;
 				assertTrue(weight > 0, mobId + " entry weights must be positive");
 				totalWeight += weight;
+				String value = entry.has("value") ? entry.get("value").getAsString() : "";
+				if (value.contains("/books/")) {
+					bookWeight = weight;
+				} else if (value.contains("/potions/")) {
+					potionWeight = weight;
+				}
 			}
+
+			assertEquals(EliteLootLayout.BOOK_SLOT_WEIGHT, bookWeight, mobId + " book slot weight");
+			assertEquals(EliteLootLayout.POTION_SLOT_WEIGHT, potionWeight, mobId + " potion slot weight");
+			assertTrue(potionWeight > bookWeight, mobId + " potions should outweigh books");
 
 			assertEquals(EXPECTED_WEIGHT_TOTAL, totalWeight, mobId + " elite table weights must sum to 100");
 		}

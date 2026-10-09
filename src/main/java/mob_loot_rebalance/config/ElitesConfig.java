@@ -11,12 +11,12 @@ public final class ElitesConfig {
 	public double spawner_trial_spawn_chance = 0.02;
 	/** Vanilla particle id. Use {@code minecraft:dust} for colored specks ({@link #particle_dust_color}). */
 	public String ambient_particle = "minecraft:dust";
-	/** ARGB color when {@link #ambient_particle} is {@code minecraft:dust}. Default: opaque red. */
-	public int particle_dust_color = 0xFFFF0000;
+	/** ARGB color when {@link #ambient_particle} is {@code minecraft:dust}. Default: silvery white with a hint of blue. */
+	public int particle_dust_color = 0xFFE8EEF8;
 	/** Size multiplier when {@link #ambient_particle} is {@code minecraft:dust}. */
-	public float particle_dust_scale = 0.4F;
-	/** Ticks between ambient particle spawns. 0 or negative disables particles. */
-	public int particle_interval_ticks = 30;
+	public float particle_dust_scale = 0.5F;
+	/** Ticks between ambient particle spawns. 0 or negative disables particles. Default 60 = 3 seconds. */
+	public int particle_interval_ticks = 60;
 	/** Outline glow for UAT spawn-rate checks only. Default off — use {@link #ambient_particle} instead. */
 	public boolean uat_glow = false;
 }

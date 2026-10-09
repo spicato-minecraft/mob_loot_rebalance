@@ -25,9 +25,9 @@ class ModConfigMigrationTest {
 		assertEquals(0.14, config.elites.spawn_chance, 0.0001);
 		assertEquals(0.02, config.elites.spawner_trial_spawn_chance, 0.0001);
 		assertEquals("minecraft:dust", config.elites.ambient_particle);
-		assertEquals(0xFFFF0000, config.elites.particle_dust_color);
-		assertEquals(0.4F, config.elites.particle_dust_scale, 0.0001F);
-		assertEquals(30, config.elites.particle_interval_ticks);
+		assertEquals(0xFFE8EEF8, config.elites.particle_dust_color);
+		assertEquals(0.5F, config.elites.particle_dust_scale, 0.0001F);
+		assertEquals(60, config.elites.particle_interval_ticks);
 		assertFalse(config.elites.uat_glow);
 		assertTrue(config.elite_loot.enabled);
 		assertEquals(100, config.kill_method.lookback_ticks);

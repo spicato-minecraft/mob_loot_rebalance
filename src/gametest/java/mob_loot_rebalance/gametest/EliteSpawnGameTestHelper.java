@@ -70,7 +70,7 @@ public final class EliteSpawnGameTestHelper {
 		BlockPos absolutePos = context.absolutePos(relativePos);
 		context.setBlock(relativePos, Blocks.SPAWNER);
 		SpawnerBlockEntity spawnerBlockEntity = context.getBlockEntity(relativePos, SpawnerBlockEntity.class);
-		spawnerBlockEntity.setEntityId(EntityType.ZOMBIE, context.getLevel().random);
+		spawnerBlockEntity.setEntityId(EntityType.ZOMBIE, context.getLevel().getRandom());
 
 		CompoundTag spawnerTag = new CompoundTag();
 		spawnerTag.putShort("Delay", (short) 0);

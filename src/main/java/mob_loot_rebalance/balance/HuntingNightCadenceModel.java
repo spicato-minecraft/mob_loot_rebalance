@@ -3,7 +3,7 @@ package mob_loot_rebalance.balance;
 /**
  * Analytical model for AC-12 hunting-night book cadence.
  * <p>
- * Book <em>slot</em> rate is {@link #BOOK_SLOT_RATE} (33 / 100 on the elite table).
+ * Book <em>slot</em> rate is {@link #BOOK_SLOT_RATE} (23 / 100 on the elite table).
  * A slot rolls core once (armor or weapon or rare Mending) and theme once:
  * core {@code 2/3} on a melee/ranged kill with equal empty/armor/weapon weight,
  * theme 0.35 → {@link #EXPECTED_BOOKS_PER_BOOK_SLOT} ≈ 1.0167. Cap is two books.
@@ -12,7 +12,7 @@ package mob_loot_rebalance.balance;
  */
 public final class HuntingNightCadenceModel {
 
-	public static final double BOOK_SLOT_RATE = 0.33;
+	public static final double BOOK_SLOT_RATE = 0.23;
 	/** Planning default: melee/ranged kill, empty:armor:weapon share core weight. */
 	public static final double P_CORE = 2.0 / 3.0;
 	public static final double P_THEME = 0.35;

@@ -1,11 +1,8 @@
 package mob_loot_rebalance.mixin;
 
-import mob_loot_rebalance.elite.EliteAmbientParticles;
-import mob_loot_rebalance.elite.EliteCombatHandshake;
 import mob_loot_rebalance.elite.EliteModifiers;
 import mob_loot_rebalance.elite.EliteSpawnService;
 import mob_loot_rebalance.elite.EliteState;
-import mob_loot_rebalance.config.ModConfig;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.entity.EntitySpawnReason;
@@ -47,19 +44,11 @@ public abstract class MobMixin {
 	}
 
 	@Inject(method = "aiStep", at = @At("TAIL"))
-	private void mob_loot_rebalance$eliteAmbientParticles(CallbackInfo ci) {
+	private void mob_loot_rebalance$syncUatGlow(CallbackInfo ci) {
 		Mob self = (Mob) (Object) this;
 		if (self.level().isClientSide() || !EliteState.isElite(self)) {
 			return;
 		}
-		if (!EliteCombatHandshake.shouldApplyFallbackPresentation()) {
-			return;
-		}
-		ModConfig config = ModConfig.get();
-		int interval = config.elites.particle_interval_ticks;
-		if (!EliteAmbientParticles.shouldEmit(config.elites) || self.tickCount % interval != 0) {
-			return;
-		}
-		EliteAmbientParticles.emit(self, (ServerLevel) self.level(), config.elites);
+		EliteModifiers.syncUatGlow(self);
 	}
 }

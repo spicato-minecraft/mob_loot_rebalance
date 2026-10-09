@@ -39,17 +39,26 @@ public final class EliteLootService {
 				config.combat_potion.allow_invisibility
 		);
 
+		if (OuterSlotWeights.total(config.elite_loot) <= 0) {
+			return;
+		}
+
 		EliteLootRollContext.run(context, () -> {
 			ResourceKey<LootTable> tableKey = ResourceKey.create(
 					Registries.LOOT_TABLE,
 					EliteLootTables.forEntityType(entity.getType())
 			);
-			List<ItemStack> generated = new ArrayList<>();
-			entity.dropFromLootTable(level, damageSource, false, tableKey, generated::add);
-			for (ItemStack stack : generated) {
-				if (shouldDropStack(stack, context)) {
-					entity.spawnAtLocation(level, stack);
+			OuterSlotWeights.pushGeneratingTable(tableKey.identifier());
+			try {
+				List<ItemStack> generated = new ArrayList<>();
+				entity.dropFromLootTable(level, damageSource, false, tableKey, generated::add);
+				for (ItemStack stack : generated) {
+					if (shouldDropStack(stack, context)) {
+						entity.spawnAtLocation(level, stack);
+					}
 				}
+			} finally {
+				OuterSlotWeights.popGeneratingTable();
 			}
 		});
 	}

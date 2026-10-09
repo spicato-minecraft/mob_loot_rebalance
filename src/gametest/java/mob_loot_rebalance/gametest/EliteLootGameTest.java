@@ -105,6 +105,7 @@ public class EliteLootGameTest {
 			int books = 0;
 			for (ItemStack stack : generated) {
 				if (stack.is(Items.ENCHANTED_BOOK)) {
+					assertEnchantedBookHasStoredEnchantment(stack);
 					books += Math.max(1, stack.getCount());
 				}
 			}
@@ -159,6 +160,7 @@ public class EliteLootGameTest {
 				if (!stack.is(Items.ENCHANTED_BOOK)) {
 					continue;
 				}
+				assertEnchantedBookHasStoredEnchantment(stack);
 				books += Math.max(1, stack.getCount());
 				if (bookHasEnchantment(stack, "minecraft:protection")) {
 					protection = true;
@@ -239,6 +241,18 @@ public class EliteLootGameTest {
 			throw EliteSpawnGameTestHelper.fail("Creeper melee kills must not drop Punch books");
 		}
 		context.succeed();
+	}
+
+	private static void assertEnchantedBookHasStoredEnchantment(ItemStack stack) {
+		ItemEnchantments stored = stack.getOrDefault(DataComponents.STORED_ENCHANTMENTS, ItemEnchantments.EMPTY);
+		if (stored.isEmpty()) {
+			throw EliteSpawnGameTestHelper.fail("Elite book drop had no stored enchantments (plain enchanted book)");
+		}
+		var customData = stack.get(DataComponents.CUSTOM_DATA);
+		if (customData == null
+				|| !customData.copyTag().getBoolean(mob_loot_rebalance.loot.EliteEnchantedBooks.LOOT_BOOK_CUSTOM_DATA_KEY).orElse(false)) {
+			throw EliteSpawnGameTestHelper.fail("Elite book drop missing loot-book custom_data (not a normal rebalance book stack)");
+		}
 	}
 
 	private static boolean bookHasEnchantment(ItemStack stack, String enchantmentId) {

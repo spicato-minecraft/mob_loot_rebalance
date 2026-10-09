@@ -11,15 +11,15 @@ class HuntingNightCadenceModelTest {
 	@Test
 	void expectedBooksUsesSpawnChanceAndThemedBooksPerSlot() {
 		assertEquals(1.0166666666666666, HuntingNightCadenceModel.EXPECTED_BOOKS_PER_BOOK_SLOT, 0.0001);
-		assertEquals(0.3355, HuntingNightCadenceModel.EXPECTED_BOOKS_PER_ELITE, 0.0001);
-		assertEquals(1.0065, HuntingNightCadenceModel.expectedBooks(100, 0.03), 0.0001);
-		assertEquals(1.342, HuntingNightCadenceModel.expectedBooks(100, 0.04), 0.0001);
-		assertEquals(2.013, HuntingNightCadenceModel.expectedBooks(100, 0.06), 0.0001);
+		assertEquals(0.23383333333333334, HuntingNightCadenceModel.EXPECTED_BOOKS_PER_ELITE, 0.0001);
+		assertEquals(0.7015, HuntingNightCadenceModel.expectedBooks(100, 0.03), 0.0001);
+		assertEquals(0.935333, HuntingNightCadenceModel.expectedBooks(100, 0.04), 0.0001);
+		assertEquals(1.403, HuntingNightCadenceModel.expectedBooks(100, 0.06), 0.0001);
 	}
 
 	@Test
 	void spawnChanceForTargetBooksInvertsExpectedFormula() {
-		assertEquals(0.03, HuntingNightCadenceModel.spawnChanceForExpectedBooks(1.0065, 100), 0.0001);
+		assertEquals(0.03, HuntingNightCadenceModel.spawnChanceForExpectedBooks(0.7015, 100), 0.0001);
 		assertEquals(
 				1.5 / (100 * HuntingNightCadenceModel.EXPECTED_BOOKS_PER_ELITE),
 				HuntingNightCadenceModel.spawnChanceForExpectedBooks(1.5, 100),
@@ -39,7 +39,7 @@ class HuntingNightCadenceModelTest {
 	@Test
 	void fourteenPercentDefaultOvershootsTargetBandAtTypicalDedicatedKillCounts() {
 		double expected = HuntingNightCadenceModel.expectedBooks(100, 0.14);
-		assertEquals(4.697, expected, 0.0001);
+		assertEquals(3.273667, expected, 0.0001);
 		assertFalse(HuntingNightCadenceModel.isInTargetBand(expected));
 	}
 
@@ -52,8 +52,8 @@ class HuntingNightCadenceModelTest {
 				0xAC12L
 		);
 		assertEquals(5_000, result.trialNights());
-		assertTrue(result.meanBooksPerNight() > 1.20 && result.meanBooksPerNight() < 1.50);
-		assertTrue(result.fractionNightsWithAtLeastOneBook() > 0.55);
+		assertTrue(result.meanBooksPerNight() > 0.80 && result.meanBooksPerNight() < 1.10);
+		assertTrue(result.fractionNightsWithAtLeastOneBook() > 0.45);
 	}
 
 	@Test

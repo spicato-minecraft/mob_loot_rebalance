@@ -29,7 +29,7 @@ public final class EliteSpawnService {
 		double chance = EntitySpawnReason.isSpawner(reason)
 				? ModConfig.get().elites.spawner_trial_spawn_chance
 				: ModConfig.get().elites.spawn_chance;
-		if (chance <= 0.0 || level.random.nextDouble() >= chance) {
+		if (chance <= 0.0 || mob.getRandom().nextDouble() >= chance) {
 			return;
 		}
 
