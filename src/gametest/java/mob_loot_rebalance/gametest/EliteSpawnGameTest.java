@@ -7,6 +7,7 @@ import net.minecraft.gametest.framework.GameTestHelper;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.EntitySpawnReason;
 import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.EntityTypes;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.level.block.Blocks;
 
@@ -20,7 +21,7 @@ public class EliteSpawnGameTest {
 
 		Mob zombie = EliteSpawnGameTestHelper.spawnAdultMob(
 				context,
-				EntityType.ZOMBIE,
+				EntityTypes.ZOMBIE,
 				EntitySpawnReason.SPAWNER,
 				new BlockPos(1, 1, 1)
 		);
@@ -35,7 +36,7 @@ public class EliteSpawnGameTest {
 
 		Mob zombie = EliteSpawnGameTestHelper.spawnAdultMob(
 				context,
-				EntityType.ZOMBIE,
+				EntityTypes.ZOMBIE,
 				EntitySpawnReason.NATURAL,
 				new BlockPos(1, 1, 1)
 		);
@@ -50,7 +51,7 @@ public class EliteSpawnGameTest {
 
 		Mob zombie = EliteSpawnGameTestHelper.spawnAdultMob(
 				context,
-				EntityType.ZOMBIE,
+				EntityTypes.ZOMBIE,
 				EntitySpawnReason.STRUCTURE,
 				new BlockPos(1, 1, 1)
 		);
@@ -65,7 +66,7 @@ public class EliteSpawnGameTest {
 
 		Mob zombie = EliteSpawnGameTestHelper.spawnAdultMob(
 				context,
-				EntityType.ZOMBIE,
+				EntityTypes.ZOMBIE,
 				EntitySpawnReason.EVENT,
 				new BlockPos(1, 1, 1)
 		);
@@ -82,7 +83,7 @@ public class EliteSpawnGameTest {
 
 		Mob zombie = EliteSpawnGameTestHelper.spawnAdultMob(
 				context,
-				EntityType.ZOMBIE,
+				EntityTypes.ZOMBIE,
 				EntitySpawnReason.SPAWNER,
 				new BlockPos(1, 1, 1)
 		);
@@ -97,7 +98,7 @@ public class EliteSpawnGameTest {
 
 		Mob phantom = EliteSpawnGameTestHelper.spawnAdultMob(
 				context,
-				EntityType.PHANTOM,
+				EntityTypes.PHANTOM,
 				EntitySpawnReason.NATURAL,
 				new BlockPos(1, 1, 1)
 		);
@@ -112,7 +113,7 @@ public class EliteSpawnGameTest {
 
 		Mob pillager = EliteSpawnGameTestHelper.spawnAdultMob(
 				context,
-				EntityType.PILLAGER,
+				EntityTypes.PILLAGER,
 				EntitySpawnReason.PATROL,
 				new BlockPos(1, 1, 1)
 		);
@@ -127,7 +128,7 @@ public class EliteSpawnGameTest {
 
 		Mob baby = EliteSpawnGameTestHelper.spawnBabyMob(
 				context,
-				EntityType.ZOMBIE,
+				EntityTypes.ZOMBIE,
 				EntitySpawnReason.NATURAL,
 				new BlockPos(1, 1, 1)
 		);
@@ -144,7 +145,7 @@ public class EliteSpawnGameTest {
 
 		Mob zombie = EliteSpawnGameTestHelper.spawnAdultMob(
 				context,
-				EntityType.ZOMBIE,
+				EntityTypes.ZOMBIE,
 				EntitySpawnReason.NATURAL,
 				new BlockPos(1, 1, 1)
 		);

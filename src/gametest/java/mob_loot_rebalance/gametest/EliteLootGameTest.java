@@ -16,6 +16,7 @@ import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.EntitySpawnReason;
 import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.EntityTypes;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.item.ItemStack;
@@ -40,7 +41,7 @@ public class EliteLootGameTest {
 			clearItemDrops(context, searchBox);
 			Mob zombie = EliteSpawnGameTestHelper.spawnAdultMob(
 					context,
-					EntityType.ZOMBIE,
+					EntityTypes.ZOMBIE,
 					EntitySpawnReason.NATURAL,
 					spawnPos
 			);
@@ -65,7 +66,7 @@ public class EliteLootGameTest {
 					));
 			if (!foundEliteTableLoot) {
 				throw EliteSpawnGameTestHelper.fail(
-						"Expected elite-table loot from " + EliteLootTables.forEntityType(EntityType.ZOMBIE)
+						"Expected elite-table loot from " + EliteLootTables.forEntityType(EntityTypes.ZOMBIE)
 				);
 			}
 		});
@@ -79,7 +80,7 @@ public class EliteLootGameTest {
 
 		Mob zombie = EliteSpawnGameTestHelper.spawnAdultMob(
 				context,
-				EntityType.ZOMBIE,
+				EntityTypes.ZOMBIE,
 				EntitySpawnReason.NATURAL,
 				spawnPos
 		);
@@ -131,7 +132,7 @@ public class EliteLootGameTest {
 
 		Mob zombie = EliteSpawnGameTestHelper.spawnAdultMob(
 				context,
-				EntityType.ZOMBIE,
+				EntityTypes.ZOMBIE,
 				EntitySpawnReason.NATURAL,
 				spawnPos
 		);
@@ -200,7 +201,7 @@ public class EliteLootGameTest {
 
 		Mob creeper = EliteSpawnGameTestHelper.spawnAdultMob(
 				context,
-				EntityType.CREEPER,
+				EntityTypes.CREEPER,
 				EntitySpawnReason.NATURAL,
 				spawnPos
 		);

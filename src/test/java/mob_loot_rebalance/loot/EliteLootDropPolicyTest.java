@@ -1,6 +1,7 @@
 package mob_loot_rebalance.loot;
 
 import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.EntityTypes;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -28,11 +29,11 @@ class EliteLootDropPolicyTest {
 	void mapsAllEliteTables() {
 		assertEquals(
 				"mob_loot_rebalance:elite/zombie",
-				EliteLootTables.forEntityType(EntityType.ZOMBIE).toString()
+				EliteLootTables.forEntityType(EntityTypes.ZOMBIE).toString()
 		);
 		assertEquals(
 				"mob_loot_rebalance:elite/witch",
-				EliteLootTables.forEntityType(EntityType.WITCH).toString()
+				EliteLootTables.forEntityType(EntityTypes.WITCH).toString()
 		);
 	}
 }

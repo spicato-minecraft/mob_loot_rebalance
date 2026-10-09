@@ -1,6 +1,7 @@
 package mob_loot_rebalance.elite;
 
 import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.EntityTypes;
 
 import java.util.Set;
 
@@ -10,41 +11,41 @@ import java.util.Set;
 public final class EliteMobTypes {
 
 	static final Set<EntityType<?>> ELIGIBLE = Set.of(
-			EntityType.ZOMBIE,
-			EntityType.HUSK,
-			EntityType.DROWNED,
-			EntityType.ZOMBIE_VILLAGER,
-			EntityType.SKELETON,
-			EntityType.STRAY,
-			EntityType.BOGGED,
-			EntityType.PARCHED,
-			EntityType.CREEPER,
-			EntityType.SPIDER,
-			EntityType.CAVE_SPIDER,
-			EntityType.WITCH,
-			EntityType.PHANTOM,
-			EntityType.ENDERMAN,
-			EntityType.SLIME,
-			EntityType.SILVERFISH,
-			EntityType.ENDERMITE,
-			EntityType.GUARDIAN,
-			EntityType.ELDER_GUARDIAN,
-			EntityType.SHULKER,
-			EntityType.GHAST,
-			EntityType.BLAZE,
-			EntityType.MAGMA_CUBE,
-			EntityType.WITHER_SKELETON,
-			EntityType.PIGLIN,
-			EntityType.PIGLIN_BRUTE,
-			EntityType.HOGLIN,
-			EntityType.ZOGLIN,
-			EntityType.ZOMBIFIED_PIGLIN,
-			EntityType.PILLAGER,
-			EntityType.VINDICATOR,
-			EntityType.EVOKER,
-			EntityType.VEX,
-			EntityType.RAVAGER,
-			EntityType.BREEZE
+			EntityTypes.ZOMBIE,
+			EntityTypes.HUSK,
+			EntityTypes.DROWNED,
+			EntityTypes.ZOMBIE_VILLAGER,
+			EntityTypes.SKELETON,
+			EntityTypes.STRAY,
+			EntityTypes.BOGGED,
+			EntityTypes.PARCHED,
+			EntityTypes.CREEPER,
+			EntityTypes.SPIDER,
+			EntityTypes.CAVE_SPIDER,
+			EntityTypes.WITCH,
+			EntityTypes.PHANTOM,
+			EntityTypes.ENDERMAN,
+			EntityTypes.SLIME,
+			EntityTypes.SILVERFISH,
+			EntityTypes.ENDERMITE,
+			EntityTypes.GUARDIAN,
+			EntityTypes.ELDER_GUARDIAN,
+			EntityTypes.SHULKER,
+			EntityTypes.GHAST,
+			EntityTypes.BLAZE,
+			EntityTypes.MAGMA_CUBE,
+			EntityTypes.WITHER_SKELETON,
+			EntityTypes.PIGLIN,
+			EntityTypes.PIGLIN_BRUTE,
+			EntityTypes.HOGLIN,
+			EntityTypes.ZOGLIN,
+			EntityTypes.ZOMBIFIED_PIGLIN,
+			EntityTypes.PILLAGER,
+			EntityTypes.VINDICATOR,
+			EntityTypes.EVOKER,
+			EntityTypes.VEX,
+			EntityTypes.RAVAGER,
+			EntityTypes.BREEZE
 	);
 
 	private EliteMobTypes() {

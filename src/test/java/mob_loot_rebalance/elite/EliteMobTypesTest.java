@@ -3,6 +3,7 @@ package mob_loot_rebalance.elite;
 import mob_loot_rebalance.loot.EliteLootTables;
 import mob_loot_rebalance.MinecraftTestBootstrap;
 import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.EntityTypes;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
@@ -20,12 +21,12 @@ class EliteMobTypesTest {
 	@Test
 	void eligibleSetHasThirtyFiveTypesAndExcludesBosses() {
 		assertEquals(35, EliteMobTypes.ELIGIBLE.size());
-		assertTrue(EliteMobTypes.isEligible(EntityType.ZOMBIE));
-		assertTrue(EliteMobTypes.isEligible(EntityType.BREEZE));
-		assertFalse(EliteMobTypes.isEligible(EntityType.WITHER));
-		assertFalse(EliteMobTypes.isEligible(EntityType.ENDER_DRAGON));
-		assertFalse(EliteMobTypes.isEligible(EntityType.WARDEN));
-		assertFalse(EliteMobTypes.isEligible(EntityType.BEE));
+		assertTrue(EliteMobTypes.isEligible(EntityTypes.ZOMBIE));
+		assertTrue(EliteMobTypes.isEligible(EntityTypes.BREEZE));
+		assertFalse(EliteMobTypes.isEligible(EntityTypes.WITHER));
+		assertFalse(EliteMobTypes.isEligible(EntityTypes.ENDER_DRAGON));
+		assertFalse(EliteMobTypes.isEligible(EntityTypes.WARDEN));
+		assertFalse(EliteMobTypes.isEligible(EntityTypes.BEE));
 	}
 
 	@Test

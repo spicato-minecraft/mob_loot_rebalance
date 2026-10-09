@@ -11,6 +11,7 @@ import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.EntitySpawnReason;
 import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.EntityTypes;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.ExperienceOrb;
 import net.minecraft.world.entity.item.ItemEntity;
@@ -28,7 +29,7 @@ public class ElitePayoutGameTest {
 
 		Mob zombie = EliteSpawnGameTestHelper.spawnAdultMob(
 				context,
-				EntityType.ZOMBIE,
+				EntityTypes.ZOMBIE,
 				EntitySpawnReason.NATURAL,
 				spawnPos
 		);
@@ -67,7 +68,7 @@ public class ElitePayoutGameTest {
 			clearDrops(context, searchBox);
 			Mob zombie = EliteSpawnGameTestHelper.spawnAdultMob(
 					context,
-					EntityType.ZOMBIE,
+					EntityTypes.ZOMBIE,
 					EntitySpawnReason.NATURAL,
 					spawnPos
 			);

@@ -12,6 +12,7 @@ import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.util.ProblemReporter;
 import net.minecraft.world.entity.EntitySpawnReason;
 import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.EntityTypes;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.entity.SpawnerBlockEntity;
@@ -70,7 +71,7 @@ public final class EliteSpawnGameTestHelper {
 		BlockPos absolutePos = context.absolutePos(relativePos);
 		context.setBlock(relativePos, Blocks.SPAWNER);
 		SpawnerBlockEntity spawnerBlockEntity = context.getBlockEntity(relativePos, SpawnerBlockEntity.class);
-		spawnerBlockEntity.setEntityId(EntityType.ZOMBIE, context.getLevel().getRandom());
+		spawnerBlockEntity.setEntityId(EntityTypes.ZOMBIE, context.getLevel().getRandom());
 
 		CompoundTag spawnerTag = new CompoundTag();
 		spawnerTag.putShort("Delay", (short) 0);

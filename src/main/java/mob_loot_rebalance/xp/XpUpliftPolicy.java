@@ -2,6 +2,7 @@ package mob_loot_rebalance.xp;
 
 import mob_loot_rebalance.config.ModConfig;
 import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.EntityTypes;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.monster.Enemy;
 import net.minecraft.world.entity.player.Player;
@@ -14,9 +15,9 @@ import java.util.Set;
 public final class XpUpliftPolicy {
 
 	private static final Set<EntityType<?>> BOSS_TYPES = Set.of(
-			EntityType.WITHER,
-			EntityType.ENDER_DRAGON,
-			EntityType.WARDEN
+			EntityTypes.WITHER,
+			EntityTypes.ENDER_DRAGON,
+			EntityTypes.WARDEN
 	);
 
 	private XpUpliftPolicy() {
