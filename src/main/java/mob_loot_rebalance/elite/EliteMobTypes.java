@@ -6,7 +6,7 @@ import net.minecraft.world.entity.EntityTypes;
 import java.util.Set;
 
 /**
- * Elite-eligible hostile mob types. Bosses (Wither, Ender Dragon, Warden) and bees are excluded.
+ * Elite-eligible hostile mob types. Bosses (Wither, Ender Dragon, Warden), bees, and passive mobs such as sulfur cubes are excluded.
  */
 public final class EliteMobTypes {
 

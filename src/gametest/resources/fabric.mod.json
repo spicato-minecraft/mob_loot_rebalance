@@ -9,7 +9,16 @@
 			"mob_loot_rebalance.gametest.ModLoadsGameTest",
 			"mob_loot_rebalance.gametest.EliteSpawnGameTest",
 			"mob_loot_rebalance.gametest.EliteLootGameTest",
-			"mob_loot_rebalance.gametest.ElitePayoutGameTest"
+			"mob_loot_rebalance.gametest.ElitePayoutGameTest",
+			"mob_loot_rebalance.gametest.ServerMixinApplySweep",
+			"mob_loot_rebalance.gametest.EliteCombatStats",
+			"mob_loot_rebalance.gametest.CreeperEliteBlastLarger",
+			"mob_loot_rebalance.gametest.UatGlowOnShowsOutline",
+			"mob_loot_rebalance.gametest.XpToggleChangesHostileKill",
+			"mob_loot_rebalance.gametest.CureClearsElite"
+		],
+		"fabric-client-gametest": [
+			"mob_loot_rebalance.clientgametest.ClientMixinApplySweep"
 		]
 	},
 	"depends": {

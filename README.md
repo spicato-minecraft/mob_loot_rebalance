@@ -101,7 +101,7 @@ Vanilla provides `EntitySpawnReason.isSpawner(reason)`, which returns true for `
 **Hook point:** mixin at the tail of `Mob.finalizeSpawn`, after vanilla spawn setup, gated by:
 
 1. `EliteSpawnPolicy.isEligibleForEliteRoll(spawnReason)`
-2. mob-type eligibility (35 matrix hostiles; no bees, Wither, Ender Dragon, or Warden)
+2. mob-type eligibility (35 matrix hostiles; no bees, sulfur cubes, Wither, Ender Dragon, or Warden)
 3. not a baby mob
 4. the chance for that reason &gt; 0
 

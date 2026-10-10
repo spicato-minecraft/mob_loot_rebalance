@@ -23,6 +23,7 @@ class EliteMobTypesTest {
 		assertEquals(35, EliteMobTypes.ELIGIBLE.size());
 		assertTrue(EliteMobTypes.isEligible(EntityTypes.ZOMBIE));
 		assertTrue(EliteMobTypes.isEligible(EntityTypes.BREEZE));
+		assertFalse(EliteMobTypes.isEligible(EntityTypes.SULFUR_CUBE));
 		assertFalse(EliteMobTypes.isEligible(EntityTypes.WITHER));
 		assertFalse(EliteMobTypes.isEligible(EntityTypes.ENDER_DRAGON));
 		assertFalse(EliteMobTypes.isEligible(EntityTypes.WARDEN));
