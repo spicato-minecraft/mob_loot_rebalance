@@ -120,13 +120,11 @@ class EliteNestedLootPoolTest {
 			}
 			KillMethod expected = ThemeEnchantmentKillMethod.forEnchantmentId(enchantId).orElse(null);
 			assertNotNull(expected, mobId + " theme pool has unclassified enchant " + enchantId);
-			JsonArray conditions = entry.getAsJsonArray("conditions");
-			assertNotNull(conditions, mobId + " " + enchantId + " must have kill_method condition");
-			assertEquals(1, conditions.size(), mobId + " " + enchantId + " should have one condition");
-			JsonObject condition = conditions.get(0).getAsJsonObject();
+			JsonObject condition = entry.getAsJsonObject("condition");
+			assertNotNull(condition, mobId + " " + enchantId + " must have kill_method condition");
 			assertEquals(
 					"mob_loot_rebalance:kill_method",
-					condition.get("condition").getAsString(),
+					condition.get("type").getAsString(),
 					mobId + " " + enchantId
 			);
 			assertEquals(
@@ -152,21 +150,21 @@ class EliteNestedLootPoolTest {
 			if (!enchantId.equals(firstSetEnchantmentId(entry))) {
 				continue;
 			}
-			JsonArray conditions = entry.getAsJsonArray("conditions");
-			assertNotNull(conditions, enchantId + " must have kill_method condition");
-			return conditions.get(0).getAsJsonObject().get("method").getAsString();
+			JsonObject condition = entry.getAsJsonObject("condition");
+			assertNotNull(condition, enchantId + " must have kill_method condition");
+			return condition.get("method").getAsString();
 		}
 		return null;
 	}
 
 	private static String firstSetEnchantmentId(JsonObject entry) {
-		if (!entry.has("functions")) {
+		if (!entry.has("modifier")) {
 			return null;
 		}
-		JsonArray functions = entry.getAsJsonArray("functions");
+		JsonArray functions = entry.getAsJsonArray("modifier");
 		for (var element : functions) {
 			JsonObject function = element.getAsJsonObject();
-			if (!"mob_loot_rebalance:fixed_enchant_book".equals(function.get("function").getAsString())) {
+			if (!"mob_loot_rebalance:fixed_enchant_book".equals(function.get("type").getAsString())) {
 				continue;
 			}
 			if (!function.has("enchantment")) {

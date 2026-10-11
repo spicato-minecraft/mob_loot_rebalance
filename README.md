@@ -1,14 +1,14 @@
 # Mob Loot Rebalance
 
-Fabric mod for Minecraft **26.2**. Occasional **elite** hostiles drop themed vanilla-only bonus loot (enchanted books and potions routed by kill method). Optional baseline XP uplift for hostiles is available in config but off by default. This JAR does **not** change how mobs swing or animate.
+Fabric mod for Minecraft **26.3**. Occasional **elite** hostiles drop themed vanilla-only bonus loot (enchanted books and potions routed by kill method). Optional baseline XP uplift for hostiles is available in config but off by default. This JAR does **not** change how mobs swing or animate.
 
 ## Compatibility
 
 | Component     | Version           |
 |---------------|-------------------|
-| Minecraft     | 26.2              |
+| Minecraft     | 26.3              |
 | Fabric Loader | 0.19.5+           |
-| Fabric API    | 0.161.0+26.2      |
+| Fabric API    | 0.162.0+26.3      |
 | Java          | 25+               |
 
 ## Build
@@ -31,30 +31,30 @@ The output JAR is at `build/libs/mob_loot_rebalance-2.0.0.jar` (version from `gr
 
 ## Install
 
-1. Install [Fabric Loader](https://fabricmc.net/use/) for Minecraft 26.2.
-2. Download [Fabric API](https://modrinth.com/mod/fabric-api) for 26.2 and place it in your mods folder.
+1. Install [Fabric Loader](https://fabricmc.net/use/) for Minecraft 26.3.
+2. Download [Fabric API](https://modrinth.com/mod/fabric-api) for 26.3 and place it in your mods folder.
 3. Copy the built JAR into your Minecraft `mods` folder.
 
 ## Branch Policy
 
 Each supported Minecraft version has its own long-lived branch named after the exact `minecraft_version` in `gradle.properties`. Version branches are the source of truth; `main` is not used.
 
-- **Default branch:** `26.2`
+- **Default branch:** `26.3`
 - **Feature/fix work:** branch from the target version as `{version}/feature-name`, merge back into the version branch
 
 ```bash
 git clone https://github.com/spicato-minecraft/mob_loot_rebalance.git
 cd mob_loot_rebalance
-git checkout 26.2
+git checkout 26.3
 ```
 
 ## Releases and Modrinth
 
 Merging code does **not** publish to Modrinth. Publishing happens only when a GitHub Release is created.
 
-Release tags use `{minecraft_version}-{mod_version}` (e.g. `26.2-2.0.0`), matching `gradle.properties`.
+Release tags use `{minecraft_version}-{mod_version}` (e.g. `26.3-2.0.0`), matching `gradle.properties`.
 
-1. Merge your changes into the version branch (e.g. `26.2`).
+1. Merge your changes into the version branch (e.g. `26.3`).
 2. Bump `mod_version` in `gradle.properties` if shipping new player-facing changes.
 3. Add a changelog at `releases/{tag}.md` — see `releases/TEMPLATE.md`.
 4. Create a GitHub Release with tag `{minecraft_version}-{mod_version}` targeting the version branch.

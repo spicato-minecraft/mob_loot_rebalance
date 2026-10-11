@@ -1,13 +1,14 @@
 package mob_loot_rebalance.mixin;
 
+import mob_loot_rebalance.loot.NestedLootTableRefs;
 import mob_loot_rebalance.loot.OuterSlot;
 import mob_loot_rebalance.loot.OuterSlotWeights;
 import net.minecraft.resources.Identifier;
-import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.level.storage.loot.LootContext;
+import net.minecraft.world.level.storage.loot.entries.ExpandableContainerBase;
 import net.minecraft.world.level.storage.loot.entries.LootPoolEntry;
-import net.minecraft.world.level.storage.loot.entries.LootPoolSingletonContainer;
 import net.minecraft.world.level.storage.loot.entries.NestedLootTable;
+import net.minecraft.world.level.storage.loot.entries.SingleEntryContainerBase;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -15,10 +16,10 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 import java.util.function.Consumer;
 
-@Mixin(LootPoolSingletonContainer.class)
+@Mixin({SingleEntryContainerBase.class, ExpandableContainerBase.class})
 public abstract class LootPoolSingletonContainerMixin {
 
-	@Inject(method = "expand", at = @At("HEAD"))
+	@Inject(method = "expandRaw", at = @At("HEAD"))
 	private void mob_loot_rebalance$pushOuterSlot(
 			LootContext context,
 			Consumer<LootPoolEntry> consumer,
@@ -27,10 +28,10 @@ public abstract class LootPoolSingletonContainerMixin {
 		if (!OuterSlotWeights.remappingOuterSlots()) {
 			return;
 		}
-		OuterSlotWeights.pushExpandingSlot(classify((LootPoolSingletonContainer) (Object) this));
+		OuterSlotWeights.pushExpandingSlot(classify(this));
 	}
 
-	@Inject(method = "expand", at = @At("RETURN"))
+	@Inject(method = "expandRaw", at = @At("RETURN"))
 	private void mob_loot_rebalance$popOuterSlot(
 			LootContext context,
 			Consumer<LootPoolEntry> consumer,
@@ -42,12 +43,11 @@ public abstract class LootPoolSingletonContainerMixin {
 		OuterSlotWeights.popExpandingSlot();
 	}
 
-	private static OuterSlot classify(LootPoolSingletonContainer container) {
+	private static OuterSlot classify(Object container) {
 		if (container instanceof NestedLootTable nested) {
-			Identifier nestedId = ((NestedLootTableAccessor) nested).mob_loot_rebalance$contents()
-					.left()
-					.map(ResourceKey::identifier)
-					.orElse(null);
+			Identifier nestedId = NestedLootTableRefs.referenceId(
+					((NestedLootTableAccessor) nested).mob_loot_rebalance$value()
+			);
 			return OuterSlotWeights.classifyNestedTable(nestedId);
 		}
 		return OuterSlot.UNIQUE;

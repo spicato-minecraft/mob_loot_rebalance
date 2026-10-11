@@ -1,4 +1,5 @@
 {
+  "type": "minecraft:entity",
   "pools": [
     {
       "rolls": 1,
@@ -27,13 +28,14 @@
           "type": "minecraft:item",
           "name": "minecraft:leather",
           "weight": 8,
-          "functions": [
+          "modifier": [
             {
-              "function": "minecraft:set_count",
               "count": {
+                "type": "minecraft:uniform",
                 "min": 2,
                 "max": 4
-              }
+              },
+              "type": "minecraft:set_count"
             }
           ]
         },
@@ -41,21 +43,22 @@
           "type": "minecraft:item",
           "name": "minecraft:tipped_arrow",
           "weight": 6,
-          "functions": [
+          "modifier": [
             {
-              "function": "minecraft:set_count",
               "count": {
+                "type": "minecraft:uniform",
                 "min": 4,
                 "max": 8
-              }
+              },
+              "type": "minecraft:set_count"
             },
             {
-              "function": "minecraft:set_components",
               "components": {
                 "minecraft:potion_contents": {
                   "potion": "minecraft:weakness"
                 }
-              }
+              },
+              "type": "minecraft:set_components"
             }
           ]
         }

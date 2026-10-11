@@ -1,4 +1,5 @@
 {
+  "type": "minecraft:entity",
   "pools": [
     {
       "rolls": 1,
@@ -22,13 +23,14 @@
           "type": "minecraft:item",
           "name": "minecraft:spectral_arrow",
           "weight": 10,
-          "functions": [
+          "modifier": [
             {
-              "function": "minecraft:set_count",
               "count": {
+                "type": "minecraft:uniform",
                 "min": 8,
                 "max": 16
-              }
+              },
+              "type": "minecraft:set_count"
             }
           ]
         },
@@ -36,21 +38,22 @@
           "type": "minecraft:item",
           "name": "minecraft:tipped_arrow",
           "weight": 3,
-          "functions": [
+          "modifier": [
             {
-              "function": "minecraft:set_count",
               "count": {
+                "type": "minecraft:uniform",
                 "min": 4,
                 "max": 8
-              }
+              },
+              "type": "minecraft:set_count"
             },
             {
-              "function": "minecraft:set_components",
               "components": {
                 "minecraft:potion_contents": {
                   "potion": "minecraft:slowness"
                 }
-              }
+              },
+              "type": "minecraft:set_components"
             }
           ]
         },
@@ -58,21 +61,22 @@
           "type": "minecraft:item",
           "name": "minecraft:tipped_arrow",
           "weight": 2,
-          "functions": [
+          "modifier": [
             {
-              "function": "minecraft:set_count",
               "count": {
+                "type": "minecraft:uniform",
                 "min": 4,
                 "max": 8
-              }
+              },
+              "type": "minecraft:set_count"
             },
             {
-              "function": "minecraft:set_components",
               "components": {
                 "minecraft:potion_contents": {
                   "potion": "minecraft:healing"
                 }
-              }
+              },
+              "type": "minecraft:set_components"
             }
           ]
         },
@@ -80,21 +84,22 @@
           "type": "minecraft:item",
           "name": "minecraft:tipped_arrow",
           "weight": 4,
-          "functions": [
+          "modifier": [
             {
-              "function": "minecraft:set_count",
               "count": {
+                "type": "minecraft:uniform",
                 "min": 4,
                 "max": 8
-              }
+              },
+              "type": "minecraft:set_count"
             },
             {
-              "function": "minecraft:set_components",
               "components": {
                 "minecraft:potion_contents": {
                   "potion": "minecraft:harming"
                 }
-              }
+              },
+              "type": "minecraft:set_components"
             }
           ]
         },
@@ -102,13 +107,14 @@
           "type": "minecraft:item",
           "name": "minecraft:bow",
           "weight": 3,
-          "functions": [
+          "modifier": [
             {
-              "function": "minecraft:set_damage",
               "damage": {
+                "type": "minecraft:uniform",
                 "min": 0.1,
                 "max": 0.9
-              }
+              },
+              "type": "minecraft:set_damage"
             }
           ]
         }

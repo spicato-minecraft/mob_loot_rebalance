@@ -8,7 +8,7 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
-@Mixin(targets = "net.minecraft.world.level.storage.loot.entries.LootPoolSingletonContainer$EntryBase")
+@Mixin(targets = "net.minecraft.world.level.storage.loot.entries.UniformContainerBase$EntryBase")
 public abstract class LootPoolEntryWeightMixin {
 
 	@Inject(method = "getWeight", at = @At("RETURN"), cancellable = true)

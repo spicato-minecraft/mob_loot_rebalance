@@ -13,8 +13,8 @@ public class ServerMixinApplySweep {
 			"net.minecraft.world.entity.Mob",
 			"net.minecraft.world.entity.LivingEntity",
 			"net.minecraft.world.entity.monster.zombie.ZombieVillager",
-			"net.minecraft.world.level.storage.loot.entries.LootPoolSingletonContainer",
-			"net.minecraft.world.level.storage.loot.entries.LootPoolSingletonContainer$EntryBase",
+			"net.minecraft.world.level.storage.loot.entries.UniformContainerBase",
+			"net.minecraft.world.level.storage.loot.entries.UniformContainerBase$EntryBase",
 			"net.minecraft.world.level.storage.loot.entries.NestedLootTable"
 	};
 

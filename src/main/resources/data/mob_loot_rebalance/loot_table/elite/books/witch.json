@@ -1,4 +1,5 @@
 {
+  "type": "minecraft:entity",
   "pools": [
     {
       "rolls": 1,
@@ -11,11 +12,11 @@
           "type": "minecraft:item",
           "name": "minecraft:enchanted_book",
           "weight": 50,
-          "functions": [
+          "modifier": [
             {
-              "function": "mob_loot_rebalance:fixed_enchant_book",
               "enchantment": "minecraft:protection",
-              "level": 1
+              "level": 1,
+              "type": "mob_loot_rebalance:fixed_enchant_book"
             }
           ]
         },
@@ -23,47 +24,43 @@
           "type": "minecraft:item",
           "name": "minecraft:enchanted_book",
           "weight": 50,
-          "functions": [
+          "modifier": [
             {
-              "function": "mob_loot_rebalance:fixed_enchant_book",
               "enchantment": "minecraft:sharpness",
-              "level": 1
+              "level": 1,
+              "type": "mob_loot_rebalance:fixed_enchant_book"
             }
           ],
-          "conditions": [
-            {
-              "condition": "mob_loot_rebalance:kill_method",
-              "method": "melee"
-            }
-          ]
+          "condition": {
+            "method": "melee",
+            "type": "mob_loot_rebalance:kill_method"
+          }
         },
         {
           "type": "minecraft:item",
           "name": "minecraft:enchanted_book",
           "weight": 50,
-          "functions": [
+          "modifier": [
             {
-              "function": "mob_loot_rebalance:fixed_enchant_book",
               "enchantment": "minecraft:power",
-              "level": 1
+              "level": 1,
+              "type": "mob_loot_rebalance:fixed_enchant_book"
             }
           ],
-          "conditions": [
-            {
-              "condition": "mob_loot_rebalance:kill_method",
-              "method": "ranged"
-            }
-          ]
+          "condition": {
+            "method": "ranged",
+            "type": "mob_loot_rebalance:kill_method"
+          }
         },
         {
           "type": "minecraft:item",
           "name": "minecraft:enchanted_book",
           "weight": 2,
-          "functions": [
+          "modifier": [
             {
-              "function": "mob_loot_rebalance:fixed_enchant_book",
               "enchantment": "minecraft:mending",
-              "level": 1
+              "level": 1,
+              "type": "mob_loot_rebalance:fixed_enchant_book"
             }
           ]
         }
@@ -80,19 +77,17 @@
           "type": "minecraft:item",
           "name": "minecraft:enchanted_book",
           "weight": 35,
-          "functions": [
+          "modifier": [
             {
-              "function": "mob_loot_rebalance:fixed_enchant_book",
               "enchantment": "minecraft:channeling",
-              "level": 1
+              "level": 1,
+              "type": "mob_loot_rebalance:fixed_enchant_book"
             }
           ],
-          "conditions": [
-            {
-              "condition": "mob_loot_rebalance:kill_method",
-              "method": "ranged"
-            }
-          ]
+          "condition": {
+            "method": "ranged",
+            "type": "mob_loot_rebalance:kill_method"
+          }
         }
       ]
     }
