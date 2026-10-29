@@ -21,7 +21,7 @@ From this directory:
 ./gradlew build
 ```
 
-The output JAR is at `build/libs/mob_loot_rebalance-2.0.0.jar` (version from `gradle.properties`).
+The output JAR is at `build/libs/mob_loot_rebalance-2.1.0.jar` (version from `gradle.properties`).
 
 ## Test
 
