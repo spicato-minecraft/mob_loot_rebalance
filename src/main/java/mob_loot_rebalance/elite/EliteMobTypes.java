@@ -54,4 +54,9 @@ public final class EliteMobTypes {
 	public static boolean isEligible(EntityType<?> type) {
 		return ELIGIBLE.contains(type);
 	}
+
+	/** Matrix hostiles that can still roll the elite spawn stamp (excludes {@link BroadEliteLootTypes}). */
+	public static boolean isEliteSpawnEligible(EntityType<?> type) {
+		return isEligible(type) && !BroadEliteLootTypes.isBroadLoot(type);
+	}
 }

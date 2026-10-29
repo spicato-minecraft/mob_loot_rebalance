@@ -20,7 +20,7 @@ public final class EliteSpawnService {
 		if (!EliteSpawnPolicy.isEligibleForEliteRoll(reason)) {
 			return;
 		}
-		if (!EliteMobTypes.isEligible(mob.getType())) {
+		if (!EliteMobTypes.isEliteSpawnEligible(mob.getType())) {
 			return;
 		}
 		if (mob.isBaby()) {

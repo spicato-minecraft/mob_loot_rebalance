@@ -3,6 +3,7 @@ package mob_loot_rebalance;
 import mob_loot_rebalance.config.ModConfig;
 import mob_loot_rebalance.elite.EliteAttachments;
 import mob_loot_rebalance.loot.FixedEnchantBookFunction;
+import mob_loot_rebalance.loot.GunpowderDrops;
 import mob_loot_rebalance.loot.KillMethodLootCondition;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.loader.api.FabricLoader;
@@ -20,6 +21,7 @@ public class Mob_loot_rebalance implements ModInitializer {
 		EliteAttachments.IS_ELITE.getClass();
 		KillMethodLootCondition.register();
 		FixedEnchantBookFunction.register();
+		GunpowderDrops.init();
 		ModConfig config = ModConfig.load();
 		ModConfig.set(config);
 		LOGGER.info(

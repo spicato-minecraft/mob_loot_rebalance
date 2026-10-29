@@ -11,6 +11,8 @@ Fabric mod for Minecraft **26.3**. Occasional **elite** hostiles drop themed van
 | Fabric API    | 0.162.0+26.3      |
 | Java          | 25+               |
 
+Gradle uses the [Foojay toolchain resolver](https://github.com/gradle/foojay-toolchains) in `settings.gradle` plus `org.gradle.java.installations.paths` in `gradle.properties` for Homebrew `openjdk@25` on this Mac. Install JDK 25 or set `JAVA_HOME` on other machines.
+
 ## Build
 
 From this directory:
@@ -151,6 +153,8 @@ Pillar helpers: `ModConfig.isXpPillarActive()`, `isElitesPillarActive()`, `isEli
 
 Default elite tables live under `data/mob_loot_rebalance/loot_table/elite/`. Each **outer** mob table is one pool with `rolls: 1`. Shipped datapack weights sum to **100** (consolation 15, books 23, potions 40, unique 22). Playtest knobs `elite_loot.consolation_weight` / `books_weight` / `potions_weight` / `unique_weight` remap those slots on the next elite kill — Apply in Pack Admin, no relaunch. Weights are relative; they do not need to sum to 100.
 
+**Gunpowder is 2× from every source this JAR owns.** Vanilla creeper and ghast entity tables double gunpowder after the roll (Looting included). Elite unique gunpowder is also 2×: creeper jackpot **16–32**, witch ingredient extras **4–8** when gunpowder is picked. Ghast tears and vanilla witch gunpowder are unchanged.
+
 | Weight | Nested table |
 |--------|----------------|
 | 15 | `minecraft:entities/<mob>` consolation |
@@ -159,6 +163,8 @@ Default elite tables live under `data/mob_loot_rebalance/loot_table/elite/`. Eac
 | 22 | per-mob unique extras |
 
 Book nested tables have **two independent pools**: **core** (one pick among empty, armor books, Sharpness or Power, rare Mending) and **theme** vs empty. A book slot drops **at most two books** (one core + one theme). Potion nested tables have **two** (Healing splash vs empty, theme vs empty). Contents: [Elite loot matrix (per-kill)](https://app.notion.com/p/3cd16e8d4da381c494a0e3100b9643d7). Level I combat books only — no Unbreaking, mining, fishing, exploration, or Wind Burst.
+
+**Ghast** and **piglin brute** skip the elite spawn stamp. Any **player kill** may run their elite table (kill-method routing unchanged) with probability `elites.spawn_chance × 0.5` (default **7%**). Bonus elite XP and kill chime still require a stamped elite.
 
 ### Kill-method routing (Phase 4)
 
